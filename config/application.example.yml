@@ -1,0 +1,11 @@
+# Add application configuration variables here, as shown below.
+#
+development:
+  SECRET_KEY_BASE: 
+  DATABASE_USERNAME: 
+  DATABASE_PASSWORD: 
+
+test:
+  SECRET_KEY_BASE: 
+  DATABASE_USERNAME: 
+  DATABASE_PASSWORD: 
