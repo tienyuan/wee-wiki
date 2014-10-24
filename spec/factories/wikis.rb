@@ -4,6 +4,5 @@ FactoryGirl.define do
     description "MyText"
     private false
     user
-    completed false
   end
 end

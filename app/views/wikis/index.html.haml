@@ -1,0 +1,9 @@
+%h1 Wiki List
+%div.row
+  %div.col-md-8
+    = link_to "Create Wiki", new_wiki_path
+%div.row
+  %div.col-md-8
+    - @wikis.each do |wiki|
+      = link_to wiki.title, wiki
+      = wiki.description

@@ -12,12 +12,12 @@ feature "User goes to wiki list to" do
 
   scenario "create a wiki" do
     visit wikis_path
-    click_link "New Wiki"
-    fill_in 'title', with: "wiki title"
-    fill_in 'description', with: "wiki description here"
+    click_link "Create Wiki"
+    fill_in 'wiki-title', with: "wiki title"
+    fill_in 'wiki-description', with: "wiki description here"
 
     within 'form' do
-      click_button 'Submit'
+      click_button 'Create'
     end
       
     expect( page ).to have_content('Wiki created!')
@@ -25,13 +25,13 @@ feature "User goes to wiki list to" do
 
   scenario "create a private wiki" do
     visit wikis_path
-    click_link "New Wiki"
-    fill_in 'title', with: "private wiki title"
-    fill_in 'description', with: "private wiki description here"
-    check_box "Private"
+    click_link "Create Wiki"
+    fill_in 'wiki-title', with: "private wiki title"
+    fill_in 'wiki-description', with: "private wiki description here"
+    uncheck('wiki-private')
 
     within 'form' do
-      click_button 'Submit'
+      click_button 'Create'
     end
       
     expect( page ).to have_content('Wiki created!')

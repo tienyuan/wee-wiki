@@ -24,7 +24,7 @@ feature "Visitor signs in" do
   end
   
   scenario "doesn't sign in" do
-    visit wiki_path
+    visit wikis_path
 
     expect(current_path).to eq wikis_path
     expect(page).to have_content('Wiki List')
