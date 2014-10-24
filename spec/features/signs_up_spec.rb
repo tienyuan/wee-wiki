@@ -25,14 +25,14 @@ feature "Visitor signs up" do
   end
 
   scenario "with invalid email" do
-    sign_up_with('new_email@example', 'Clark Kent' 'new_username', 'password')
+    sign_up_with('new_email@example', 'Clark Kent', 'new_username', 'password')
 
     expect(current_path).to eq user_registration_path
     expect( page ).to have_content('Email is invalid')
   end
 
   scenario "with duplicate email" do
-    sign_up_with('new_email@example.com', 'Clark Kent' 'new_username', 'password')
+    sign_up_with('new_email@example.com', 'Clark Kent', 'new_username', 'password')
     click_email_confirmation_link('new_email@example.com')
 
     sign_up_with('new_email@example.com', 'Clark Kent' 'other_username', 'password')
@@ -41,21 +41,21 @@ feature "Visitor signs up" do
   end
 
   scenario "with blank name" do
-    sign_up_with('new_email@example.com', '' 'new_username', 'password')
+    sign_up_with('new_email@example.com', '', 'new_username', 'password')
 
     expect(current_path).to eq user_registration_path
     expect( page ).to have_content("Name can't be blank")
   end
 
   scenario "with blank username" do
-    sign_up_with('new_email@example.com', 'Clark Kent' '', 'password')
+    sign_up_with('new_email@example.com', 'Clark Kent', '', 'password')
 
     expect(current_path).to eq user_registration_path
     expect( page ).to have_content("Username can't be blank")
   end
 
   scenario "with duplicate username" do
-    sign_up_with('new_email@example.com', 'Clark Kent' 'new_username', 'password')
+    sign_up_with('new_email@example.com', 'Clark Kent', 'new_username', 'password')
     click_email_confirmation_link('new_email@example.com')
 
     sign_up_with('other_email@example.com', 'new_username', 'password')
@@ -64,7 +64,7 @@ feature "Visitor signs up" do
   end
 
   scenario "with blank password" do
-    sign_up_with('new_email@example.com', 'Clark Kent' 'new_username', '')
+    sign_up_with('new_email@example.com', 'Clark Kent', 'new_username', '')
 
     expect(current_path).to eq user_registration_path
     expect( page ).to have_content("Password can't be blank")
