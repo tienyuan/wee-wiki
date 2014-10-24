@@ -5,24 +5,33 @@
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
 
-  %body.container
-    %div.header
-      %div.pull-right
-        = link_to "Sign Up", new_user_registration_path
-        or
-        = link_to "Sign In", new_user_session_path
-      %h3 
-        = link_to "Wee Wiki", root_path
+  %body
+    %div.navbar.navbar-default.navbar-static-top{:role => "navigation"}
+      %div.container
+        %div.navbar-header        
+          = link_to "Wee Wiki", root_path, class: 'navbar-brand'
+        %ul.nav.navbar-nav.navbar-right
+          - if current_user
+            %li
+              = link_to (current_user.username), edit_user_registration_path
+            %li
+              = link_to destroy_user_session_path, method: :delete do
+                Sign Out
+          - else
+            %li
+              = link_to "Sign Up", new_user_registration_path
+            %li
+              = link_to "Sign In", new_user_session_path
 
-    %div.row.alertrow
-      - if flash[:notice]
-        %div.alert.alert-success 
-          = flash[:notice]
-      - elsif flash[:alert]
-        %div.alert.alert.alert-warning  
-          = flash[:alert]
-      - elsif flash[:error]
-        %div.alert.alert.alert-danger  
-          = flash[:error]
-
-    = yield
+    %div.container
+      %div.row.alertrow
+        - if flash[:notice]
+          %div.alert.alert-success 
+            = flash[:notice]
+        - elsif flash[:alert]
+          %div.alert.alert.alert-warning  
+            = flash[:alert]
+        - elsif flash[:error]
+          %div.alert.alert.alert-danger  
+            = flash[:error]
+      = yield
