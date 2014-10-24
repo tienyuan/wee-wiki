@@ -9,6 +9,8 @@ gem 'sass-rails', '~> 4.0.3'
 gem 'coffee-rails', '~> 4.0.0'
 gem 'jquery-rails'
 gem 'bootstrap-sass'
+gem 'haml'
+gem 'haml-rails'
 gem 'figaro'
 
 group :production do
