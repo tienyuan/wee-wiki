@@ -20,6 +20,8 @@ feature "Visitor signs up" do
     within 'form' do
       click_button 'Sign in'
     end
+
+    expect(current_path).to eq wikis_path
   end
 
   scenario "with invalid email" do
