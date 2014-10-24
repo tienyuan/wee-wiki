@@ -20,8 +20,6 @@ feature "Visitor signs up" do
     within 'form' do
       click_button 'Sign in'
     end
-
-    expect(current_path).to eq tasks_path
   end
 
   scenario "with invalid email" do
@@ -35,7 +33,7 @@ feature "Visitor signs up" do
     sign_up_with('new_email@example.com', 'Clark Kent', 'new_username', 'password')
     click_email_confirmation_link('new_email@example.com')
 
-    sign_up_with('new_email@example.com', 'Clark Kent' 'other_username', 'password')
+    sign_up_with('new_email@example.com', 'Clark Kent', 'other_username', 'password')
     expect(current_path).to eq user_registration_path
     expect( page ).to have_content('Email has already been taken')
   end
@@ -58,7 +56,7 @@ feature "Visitor signs up" do
     sign_up_with('new_email@example.com', 'Clark Kent', 'new_username', 'password')
     click_email_confirmation_link('new_email@example.com')
 
-    sign_up_with('other_email@example.com', 'new_username', 'password')
+    sign_up_with('other_email@example.com', 'Clark Kent', 'new_username', 'password')
     expect(current_path).to eq user_registration_path
     expect( page ).to have_content('Username has already been taken')
   end
