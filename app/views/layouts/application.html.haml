@@ -1,0 +1,28 @@
+%html
+  %head
+    %title WeeWiki
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+
+  %body.container
+    %div.header
+      %div.pull-right
+        = link_to "Sign Up", new_user_registration_path
+        or
+        = link_to "Sign In", new_user_session_path
+      %h3 
+        = link_to "Wee Wiki", root_path
+
+    %div.row.alertrow
+      - if flash[:notice]
+        %div.alert.alert-success 
+          = flash[:notice]
+      - elsif flash[:alert]
+        %div.alert.alert.alert-warning  
+          = flash[:alert]
+      - elsif flash[:error]
+        %div.alert.alert.alert-danger  
+          = flash[:error]
+
+    = yield
