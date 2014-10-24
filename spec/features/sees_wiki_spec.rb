@@ -13,8 +13,9 @@ feature "User goes to wiki list" do
   scenario "sees wiki title" do
     wiki = create(:wiki, title: 'wiki title', description: 'wiki description')
     visit wikis_path
-    expect( page ).to have_content('wiki title')
-    expect( page ).to have_content('wiki description')
+
+    expect(page).to have_content('wiki title')
+    expect(page).to have_content('wiki description')
   end
 
   after do
