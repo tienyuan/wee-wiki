@@ -12,6 +12,7 @@ gem 'bootstrap-sass'
 gem 'haml'
 gem 'haml-rails'
 gem 'figaro'
+gem 'devise'
 
 group :production do
   gem 'rails_12factor'
@@ -30,6 +31,7 @@ group :test do
   gem 'factory_girl_rails'
   gem 'shoulda-matchers'
   gem 'capybara'
+  gem 'email_spec', '~> 1.6.0'
 end
 
 # Use Uglifier as compressor for JavaScript assets
