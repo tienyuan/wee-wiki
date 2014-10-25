@@ -12,7 +12,13 @@ feature "User adds collaborators to wiki" do
     wiki = create(:wiki, title: 'wiki title', description: 'wiki description')
   end
 
-  xscenario "sucessfully" do
+  xscenario "with a valid user" do
+    visit wikis_path
+    click_link "wiki title"
+    click_link "add collaborators"
+  end
+
+  xscenario "with an invalid user" do
     visit wikis_path
     click_link "wiki title"
     click_link "add collaborators"

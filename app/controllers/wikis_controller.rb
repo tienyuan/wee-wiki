@@ -20,8 +20,8 @@ class WikisController < ApplicationController
       redirect_to @wiki
       flash[:notice] = "Wiki created!"
     else
-      flash[:error] = "I couldn't create your Wiki. Please try again."
-      render[:new]
+      flash[:error] = "Wiki failed. Please try again."
+      render :new
     end
   end
 

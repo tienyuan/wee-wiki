@@ -23,7 +23,6 @@ feature "User goes to wiki list to" do
     expect(page).to have_content('Wiki created!')
     expect(page).to have_content('Wiki title')
     expect(page).to have_content('Wiki description')
-    expect(page).to have_content(@user.username)
   end
 
   scenario "create a private wiki" do
@@ -40,7 +39,33 @@ feature "User goes to wiki list to" do
     expect(page).to have_content('Wiki created!')
     expect(page).to have_content('Private wiki title')
     expect(page).to have_content('Private wiki description')
-    expect(page).to have_content(@user.username)
+    expect(Wiki.last.private).to eq true
+  end
+
+  scenario "fails to create a wiki with no title" do
+    visit wikis_path
+    click_link "Create Wiki"
+    fill_in 'wiki-title', with: ""
+    fill_in 'wiki-description', with: "Wiki description"
+
+    within 'form' do
+      click_button 'Create'
+    end
+      
+    expect(page).to have_content("Wiki failed.")
+  end
+
+  scenario "fails to create a wiki with no description" do
+    visit wikis_path
+    click_link "Create Wiki"
+    fill_in 'wiki-title', with: "Wiki title"
+    fill_in 'wiki-description', with: ""
+
+    within 'form' do
+      click_button 'Create'
+    end
+      
+    expect(page).to have_content("Wiki failed.")
   end
 
   after do

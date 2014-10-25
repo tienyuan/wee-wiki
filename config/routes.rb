@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
-  resources :wikis
+
+  resources :wikis do
+    resources :pages, except: [:index], controller: 'wikis/pages'
+  end
 
   devise_for :users
 
