@@ -1,2 +1,12 @@
-%h1 Pages#new
-%p Find me in app/views/pages/new.html.haml
+%h1 Create Page
+%div.row
+  %div.col-md-8
+    = form_for @page do |f|
+      %div.form-group
+        = f.label :title
+        = f.text_field :title, id: 'page-body', class: 'form-control'
+      %div.form-group
+        = f.label :body
+        = f.text_field :body, id: 'page-body', class: 'form-control'
+      %div.form-group
+        = f.submit "Add"
