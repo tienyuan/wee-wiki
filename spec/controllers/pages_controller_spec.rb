@@ -2,8 +2,14 @@ require 'rails_helper'
 
 RSpec.describe Wikis::PagesController, :type => :controller do
 
-  describe "#show" do
+  include Devise::TestHelpers
 
+  before do
+    @user = create(:user)
+    sign_in @user
+  end
+
+  describe "#show" do
     before do
       @wiki = create(:wiki)
       @page = create(:page, wiki: @wiki)
@@ -16,7 +22,6 @@ RSpec.describe Wikis::PagesController, :type => :controller do
   end
 
   describe "#new" do
-
     before do
       @wiki = create(:wiki)
     end
@@ -28,7 +33,6 @@ RSpec.describe Wikis::PagesController, :type => :controller do
   end
 
   describe "#edit" do
-
     before do
       @wiki = create(:wiki)
       @page = create(:page, wiki: @wiki)

@@ -13,6 +13,7 @@ gem 'haml'
 gem 'haml-rails'
 gem 'figaro'
 gem 'devise'
+gem 'pundit'
 
 group :production do
   gem 'rails_12factor'

@@ -8,11 +8,13 @@ class Wikis::PagesController < ApplicationController
   def new
     @wiki = Wiki.find(params[:wiki_id])
     @page = Page.new
+    authorize @page
   end
 
   def create
     @wiki = Wiki.find(params[:wiki_id])
     @page = @wiki.pages.new(page_params)
+    authorize @page
     if @page.save
       redirect_to [@wiki, @page], notice: "Page added!"
     else

@@ -2,6 +2,13 @@ require 'rails_helper'
 
 RSpec.describe WikisController, :type => :controller do
 
+  include Devise::TestHelpers
+
+  before do
+    @user = create(:user)
+    sign_in @user
+  end
+
   describe "GET index" do
     it "returns http success" do
       get :index
@@ -10,7 +17,6 @@ RSpec.describe WikisController, :type => :controller do
   end
 
   describe "GET show" do
-    
     before do
       @wiki = create(:wiki)
     end
@@ -29,7 +35,6 @@ RSpec.describe WikisController, :type => :controller do
   end
 
   describe "GET edit" do
-
     before do
       @wiki = create(:wiki)
     end
