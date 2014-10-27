@@ -1,18 +1,18 @@
 class Wikis::PagesController < ApplicationController
 
   def show
-    @wiki = Wiki.find(params[:wiki_id])
+    @wiki = Wiki.friendly.find(params[:wiki_id])
     @page = Page.find(params[:id])
   end
 
   def new
-    @wiki = Wiki.find(params[:wiki_id])
+    @wiki = Wiki.friendly.find(params[:wiki_id])
     @page = Page.new
     authorize @page
   end
 
   def create
-    @wiki = Wiki.find(params[:wiki_id])
+    @wiki = Wiki.friendly.find(params[:wiki_id])
     @page = @wiki.pages.new(page_params)
     authorize @page
     if @page.save

@@ -14,6 +14,7 @@ gem 'haml-rails'
 gem 'figaro'
 gem 'devise'
 gem 'pundit'
+gem 'friendly_id'
 
 group :production do
   gem 'rails_12factor'
