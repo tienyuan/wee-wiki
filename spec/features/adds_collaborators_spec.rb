@@ -12,7 +12,7 @@ feature "User adds collaborators to wiki" do
     @wiki = create(:wiki, title: 'wiki title', description: 'wiki description')
   end
 
-  scenario "with a valid user email" do
+  scenario "with a valid user email and then remove" do
     visit wikis_path
     click_link "wiki title"
 
@@ -23,6 +23,10 @@ feature "User adds collaborators to wiki" do
 
     expect(page).to have_content('Collaborator added!')
     expect(page).to have_content(@collaborator.username)
+
+    click_link "remove"
+    expect(page).to have_content('Collaborator removed.')
+    expect(page).not_to have_content(@collaborator.username)
   end
 
   scenario "with an invalid user email" do
@@ -37,7 +41,7 @@ feature "User adds collaborators to wiki" do
     expect(page).to have_content('Collaborator failed.')
   end
 
-   scenario "with a blank email" do
+  scenario "with a blank email" do
     visit wikis_path
     click_link "wiki title"
 

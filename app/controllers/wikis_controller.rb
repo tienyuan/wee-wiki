@@ -7,8 +7,8 @@ class WikisController < ApplicationController
   def show
     @wiki = Wiki.friendly.find(params[:id])
     @pages = @wiki.pages
-    @collaboration = Collaboration.new
     @collaborations = @wiki.users
+    @collaboration = Collaboration.new
   end
 
   def new

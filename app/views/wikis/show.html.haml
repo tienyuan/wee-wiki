@@ -13,11 +13,13 @@
     %li
       = link_to page.title, wiki_page_path(@wiki, page)
 
+
 %h4 Current Collaborators
-%p
-  = render partial: 'collaborations', locals: {wiki: @wiki, collaboration: @collaboration }
+- if current_user
+  = render partial: 'collaborations', locals: {wiki: @wiki, collaboration: @collaboration}
 
 %ul 
   - @collaborations.each do |user|
     %li
-      = user.username
+      = user.username 
+      = link_to "remove", wiki_collaboration_path(@wiki, user), method: :delete, data: { confirm: 'Are you sure you want to delete this user?' }

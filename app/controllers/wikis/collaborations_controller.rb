@@ -1,10 +1,5 @@
 class Wikis::CollaborationsController < ApplicationController
 
-  def show
-    @wiki = Wiki.friendly.find(params[:wiki_id])
-    @collaboration = Collaboration.find(params[:id])
-  end
-
   def create
     @email = params[:user][:email]
     @user = User.where(email: @email).first if @email
@@ -18,6 +13,21 @@ class Wikis::CollaborationsController < ApplicationController
       redirect_to @wiki, notice: "Collaborator added!"
     else
       flash[:error] = "Collaborator failed. Please try again."
+      redirect_to @wiki
+    end
+  end
+
+  def destroy
+    @wiki = Wiki.friendly.find(params[:wiki_id])
+    @user = User.find(params[:id])
+    @collaboration = Collaboration.where(wiki: @wiki, user: @user).first
+
+    authorize @collaboration
+    if @collaboration.destroy
+      flash[:notice] = "Collaborator removed."
+      redirect_to @wiki
+    else
+      flash[:error] = "Removal failed. Please try again."
       redirect_to @wiki
     end
   end
