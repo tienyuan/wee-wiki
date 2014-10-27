@@ -26,6 +26,19 @@ class WikisController < ApplicationController
   end
 
   def edit
+    @wiki = Wiki.friendly.find(params[:id])
+    authorize @wiki
+  end
+
+  def update
+    @wiki = Wiki.friendly.find(params[:id])
+    authorize @wiki
+    if @wiki.update_attributes(wiki_params)
+      redirect_to @wiki, notice: "Wiki updated!"
+    else
+      flash[:error] = "Wiki failed. Please try again."
+      render :new
+    end
   end
 
   private
