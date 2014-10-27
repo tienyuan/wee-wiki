@@ -4,9 +4,9 @@
     = form_for [@wiki, @page] do |f|
       %div.form-group
         = f.label :title
-        = f.text_field :title, id: 'page-body', class: 'form-control'
+        = f.text_field :title, id: 'page-title', class: 'form-control'
       %div.form-group
         = f.label :body
-        = f.text_field :body, id: 'page-body', class: 'form-control'
+        = f.text_area :body, id: 'page-body', class: 'form-control'
       %div.form-group
         = f.submit "Add"

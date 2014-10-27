@@ -24,7 +24,7 @@ feature "User creates a page" do
       
     expect(page).to have_content('Page added!')
     expect(page).to have_content('Page title')
-    expect(page).to have_content('Page description')
+    expect(page).to have_content('Page body')
   end
 
   scenario "with no title" do

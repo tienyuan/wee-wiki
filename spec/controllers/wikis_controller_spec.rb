@@ -10,8 +10,13 @@ RSpec.describe WikisController, :type => :controller do
   end
 
   describe "GET show" do
-    xit "returns http success" do
-      get :show
+    
+    before do
+      @wiki = create(:wiki)
+    end
+
+    it "returns http success" do
+      get :show, {id: @wiki.id}
       expect(response).to have_http_status(:success)
     end
   end
@@ -24,8 +29,13 @@ RSpec.describe WikisController, :type => :controller do
   end
 
   describe "GET edit" do
-    xit "returns http success" do
-      get :edit
+
+    before do
+      @wiki = create(:wiki)
+    end
+
+    it "returns http success" do
+      get :edit, {id: @wiki.id}
       expect(response).to have_http_status(:success)
     end
   end
