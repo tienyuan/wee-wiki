@@ -1,6 +1,5 @@
 class Wiki < ActiveRecord::Base
   extend FriendlyId
-  friendly_id :title, use: :slugged
 
   belongs_to :user
   has_many :pages, dependent: :destroy
@@ -9,4 +8,6 @@ class Wiki < ActiveRecord::Base
 
   validates :title, presence: true, uniqueness: true
   validates :description, presence: true
+
+  friendly_id :title, use: :slugged
 end

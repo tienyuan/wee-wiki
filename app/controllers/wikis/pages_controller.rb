@@ -2,7 +2,7 @@ class Wikis::PagesController < ApplicationController
 
   def show
     @wiki = Wiki.friendly.find(params[:wiki_id])
-    @page = Page.find(params[:id])
+    @page = Page.friendly.find(params[:id])
   end
 
   def new

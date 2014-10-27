@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141027042752) do
+ActiveRecord::Schema.define(version: 20141027045817) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,8 +33,10 @@ ActiveRecord::Schema.define(version: 20141027042752) do
     t.integer  "wiki_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "slug"
   end
 
+  add_index "pages", ["slug"], name: "index_pages_on_slug", using: :btree
   add_index "pages", ["wiki_id"], name: "index_pages_on_wiki_id", using: :btree
 
   create_table "users", force: true do |t|
