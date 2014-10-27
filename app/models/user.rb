@@ -8,7 +8,6 @@ class User < ActiveRecord::Base
   validates :username, presence: true, uniqueness: true
 
   has_many :owned_wikis, class_name: 'Wiki', foreign_key: 'owner_id'
-  # has_many :collaborations
-  # has_many :collaborators, through: :collaborations, source: :wiki
-  # has_many :wikis, through :collaborations
+  has_many :collaborations
+  has_many :wikis, through: :collaborations
 end

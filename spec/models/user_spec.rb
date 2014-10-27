@@ -15,6 +15,7 @@ describe User do
 
     describe "ActiveRecord associations" do
       it { expect(@user).to have_many(:owned_wikis) }
+      it { expect(@user).to have_many(:wikis) }
     end
   end
 end

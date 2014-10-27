@@ -16,6 +16,7 @@ describe Wiki do
     describe "ActiveRecord associations" do
       it { expect(@wiki).to belong_to(:owner) }
       it { expect(@wiki).to have_many(:pages) }
+      it { expect(@wiki).to have_many(:users) }
     end
   end
 end
