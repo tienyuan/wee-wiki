@@ -9,11 +9,12 @@ feature "User adds collaborators to wiki" do
     @user = create(:user)
     @collaborator = create(:user)
     login_as(@user, :scope => :user)
-    wiki = create(:wiki, title: 'wiki title', description: 'wiki description')
+    @wiki = create(:wiki, title: 'wiki title', description: 'wiki description')
   end
 
-  scenario "with a valid user" do
+  xscenario "with a valid user" do
     visit wikis_path
+    
     click_link "wiki title"
 
     fill_in 'user-email', with: "@collaborator.email"

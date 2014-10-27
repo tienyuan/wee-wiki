@@ -3,6 +3,6 @@ FactoryGirl.define do
     title "MyTitle"
     description "MyText"
     private false
-    user
+    owner { create(:user) }
   end
 end

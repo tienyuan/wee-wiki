@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
   resources :wikis do
     resources :pages, controller: 'wikis/pages'
+    resources :collaborations, only: [:create], controller: 'wikis/collaborations'
   end
 
   # The priority is based upon order of creation: first created -> highest priority.

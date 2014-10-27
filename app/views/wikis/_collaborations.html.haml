@@ -1,0 +1,12 @@
+%h1 i am the form
+
+= debug @wiki.inspect
+= debug @collaboration.inspect
+
+%h1 i am the end of the form
+= form_for [wiki, collaboration] do |f|
+  %div.form-group
+    = f.label :email
+    = f.text_field :email, id: 'user-email', class: 'form-control'
+  %div.form-group
+    = f.submit "Add"

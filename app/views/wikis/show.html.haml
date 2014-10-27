@@ -16,6 +16,6 @@
 %h4 Current Collaborators
 %p
   %b Add 
-  - render partial: 'collaborators', locals: {wiki: @wiki}
+  = render partial: 'collaborations', locals: {wiki: @wiki, collaboration: @collaboration }
 
 %p username x to remove
