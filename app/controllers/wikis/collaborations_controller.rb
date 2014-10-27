@@ -5,22 +5,20 @@ class Wikis::CollaborationsController < ApplicationController
     @collaboration = Collaboration.find(params[:id])
   end
 
-  # def new
-  #   puts "i am in new"
-  #   @wiki = Wiki.friendly.find(params[:wiki_id])
-  #   authorize @collaboration
-  # end
-
   def create
+    @email = params[:user][:email]
+    @user = User.where(email: @email).first if @email
     @wiki = Wiki.friendly.find(params[:wiki_id])
-    @collaboration = @collaboration.new(collab_params)
-    authorize @collaboration
-    if @collaboration.save
+    @collaboration = Collaboration.new(wiki: @wiki, user: @user) if @user 
+    
+    authorize @collaboration if @collaboration
+
+    if @collaboration
+      @collaboration.save
       redirect_to @wiki, notice: "Collaborator added!"
     else
       flash[:error] = "Collaborator failed. Please try again."
-      render :new
+      redirect_to @wiki
     end
   end
-
 end

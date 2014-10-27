@@ -1,9 +1,7 @@
-/ = debug @wiki.inspect
-/ = debug @collaboration.inspect
-
-/ = form_for [wiki, collaboration] do |f|
-/   %div.form-group
-/     = f.label :email
-/     = f.text_field :email, id: 'user-email', class: 'form-control'
-/   %div.form-group
-/     = f.submit "Add"
+= form_for [wiki, collaboration] do |f|
+  %div.form-group
+    = fields_for :user do |user_fields| 
+      = user_fields.label :email, "Enter Collaborator Email"
+      = user_fields.text_field :email, id: 'user-email', class: 'form-control'
+  %div.form-group
+    = f.submit "Add"

@@ -15,7 +15,9 @@
 
 %h4 Current Collaborators
 %p
-  %b Add 
   = render partial: 'collaborations', locals: {wiki: @wiki, collaboration: @collaboration }
 
-%p username x to remove
+%ul 
+  - @collaborations.each do |user|
+    %li
+      = user.username
