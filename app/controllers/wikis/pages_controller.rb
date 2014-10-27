@@ -1,15 +1,22 @@
 class Wikis::PagesController < ApplicationController
 
   def show
+    @wiki = Wiki.find(params[:wiki_id])
+    @page = Page.find(params[:id])
+    puts "i am in show page"
   end
 
   def new
     @wiki = Wiki.find(params[:wiki_id])
     @page = Page.new
+    puts "i am in new"
   end
 
   def create
-    @page = @wiki.pages.new(page_params)
+    puts "i am in create"
+    @wiki = Wiki.find(params[:wiki_id])
+    @page = page.build(page_params)
+    @page.wiki = @wiki
     
     if @page.save
       redirect_to @page

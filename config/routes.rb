@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
 
-  resources :wikis do
-    resources :pages, except: [:index], controller: 'wikis/pages'
-  end
-
   devise_for :users
+
+  resources :wikis do
+    resources :pages, controller: 'wikis/pages'
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
