@@ -55,7 +55,6 @@ RSpec.describe WikisController, :type => :controller do
 
       expect(response).to have_http_status(:success)
       expect(flash[:error]).to eq "Wiki failed. Please try again."
-
     end
 
     it "fails with a blank description" do

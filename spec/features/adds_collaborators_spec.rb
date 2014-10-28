@@ -15,7 +15,6 @@ feature "User adds collaborators to wiki" do
   scenario "with a valid user email and then remove" do
     visit wikis_path
     click_link "wiki title"
-
     fill_in 'user-email', with: @collaborator.email
     within 'form' do
       click_button 'Add'
@@ -32,7 +31,6 @@ feature "User adds collaborators to wiki" do
   scenario "with an invalid user email" do
     visit wikis_path
     click_link "wiki title"
-
     fill_in 'user-email', with: 'invalid@email.com'
     within 'form' do
       click_button 'Add'
@@ -44,7 +42,6 @@ feature "User adds collaborators to wiki" do
   scenario "with a blank email" do
     visit wikis_path
     click_link "wiki title"
-
     fill_in 'user-email', with: ''
     within 'form' do
       click_button 'Add'

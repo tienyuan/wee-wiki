@@ -15,7 +15,6 @@ feature "User goes to wiki list to" do
     click_link "Create Wiki"
     fill_in 'wiki-title', with: "Wiki title"
     fill_in 'wiki-description', with: "Wiki description"
-
     within 'form' do
       click_button 'Create'
     end
@@ -31,7 +30,6 @@ feature "User goes to wiki list to" do
     fill_in 'wiki-title', with: "Private wiki title"
     fill_in 'wiki-description', with: "Private wiki description"
     check('wiki-private')
-
     within 'form' do
       click_button 'Create'
     end
@@ -47,7 +45,6 @@ feature "User goes to wiki list to" do
     click_link "Create Wiki"
     fill_in 'wiki-title', with: ""
     fill_in 'wiki-description', with: "Wiki description"
-
     within 'form' do
       click_button 'Create'
     end
@@ -60,7 +57,6 @@ feature "User goes to wiki list to" do
     click_link "Create Wiki"
     fill_in 'wiki-title', with: "Wiki title"
     fill_in 'wiki-description', with: ""
-
     within 'form' do
       click_button 'Create'
     end

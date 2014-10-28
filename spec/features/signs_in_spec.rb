@@ -38,7 +38,6 @@ feature "Visitor signs in" do
     click_link 'Sign In'
     fill_in 'Email', with: email
     fill_in 'Password', with: password
-
     within 'form' do
       click_button 'Sign in'
     end

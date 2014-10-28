@@ -48,7 +48,6 @@ describe Wikis::PagesController do
 
       expect(response).to have_http_status(:success)
       expect(flash[:error]).to eq "Page failed. Please try again."
-
     end
 
     it "fails with a blank description" do

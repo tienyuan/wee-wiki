@@ -16,7 +16,6 @@ feature "User goes to wiki list to" do
     click_link "Wiki title"
     click_link "Edit Wiki"
     fill_in 'wiki-title', with: "New wiki title"
-
     within 'form' do
       click_button 'Edit'
     end

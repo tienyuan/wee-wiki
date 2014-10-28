@@ -26,7 +26,6 @@ describe Wikis::CollaborationsController do
 
       expect(response).to be_redirect
       expect(flash[:error]).to eq "Collaborator failed. Please try again."
-      
     end
 
     it "fails with a invalid email" do
@@ -34,7 +33,6 @@ describe Wikis::CollaborationsController do
       post :create, params
 
       expect(flash[:error]).to eq "Collaborator failed. Please try again."
-      
     end
   end
 
@@ -44,7 +42,6 @@ describe Wikis::CollaborationsController do
       delete :destroy, wiki_id: @wiki.id, id: @user.id
 
       expect(response).to be_redirect
-      
       expect(flash[:notice]).to eq "Collaborator removed."
       expect(Collaboration.count).to eq(0)
     end
