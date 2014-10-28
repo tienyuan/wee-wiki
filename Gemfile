@@ -15,6 +15,7 @@ gem 'figaro'
 gem 'devise'
 gem 'pundit'
 gem 'friendly_id'
+gem 'redcarpet'
 
 group :production do
   gem 'rails_12factor'
