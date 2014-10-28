@@ -24,6 +24,21 @@ class Wikis::PagesController < ApplicationController
   end
 
   def edit
+    @wiki = Wiki.friendly.find(params[:wiki_id])
+    @page = Page.friendly.find(params[:id])
+    authorize @page
+  end
+
+  def update
+    @wiki = Wiki.friendly.find(params[:wiki_id])
+    @page = Page.friendly.find(params[:id])
+    authorize @page
+    if @page.update_attributes(page_params)
+      redirect_to [@wiki, @page], notice: "Page edited!"
+    else
+      flash[:error] = "Page edit failed. Please try again."
+      render :edit
+    end
   end
 
   private

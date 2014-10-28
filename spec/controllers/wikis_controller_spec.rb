@@ -46,6 +46,7 @@ RSpec.describe WikisController, :type => :controller do
       post :create, params
 
       expect(response).to be_redirect
+      expect(Wiki.last.title).to eq('wiki title')
     end
 
     it "fails with a blank title" do
@@ -85,7 +86,8 @@ RSpec.describe WikisController, :type => :controller do
       patch :update, id: @wiki.id, wiki:{title: 'new title'}
       @wiki.reload
 
-      expect( response ).to be_redirect
+      expect(response).to be_redirect
+      expect(@wiki.title).to eq('new title')
     end
 
     it "fails without a title" do
@@ -93,7 +95,7 @@ RSpec.describe WikisController, :type => :controller do
       patch :update, id: @wiki.id, wiki:{title: invalid_title}
 
       expect(response).to have_http_status(:success)
-      expect(flash[:error]).to eq "Wiki failed. Please try again."
+      expect(flash[:error]).to eq "Wiki edit failed. Please try again."
     end
 
     it "fails without a description" do
@@ -101,7 +103,7 @@ RSpec.describe WikisController, :type => :controller do
       patch :update, id: @wiki.id, wiki:{description: invalid_description}
 
       expect(response).to have_http_status(:success)
-      expect(flash[:error]).to eq "Wiki failed. Please try again."
+      expect(flash[:error]).to eq "Wiki edit failed. Please try again."
     end
   end
 

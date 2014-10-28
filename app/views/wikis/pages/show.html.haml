@@ -3,6 +3,9 @@
 
 %p
   = link_to "Back", @wiki  
+- if current_user
+  = link_to "Edit Page", edit_wiki_page_path(@wiki, @page)
+
 %h2
   = @page.title
 %p 

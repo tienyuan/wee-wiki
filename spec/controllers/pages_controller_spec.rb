@@ -39,6 +39,7 @@ describe Wikis::PagesController do
       post :create, params
 
       expect(response).to be_redirect
+      expect(Page.last.title).to eq('page title')
     end
 
     it "fails with a blank title" do
@@ -73,23 +74,24 @@ describe Wikis::PagesController do
       patch :update, wiki_id: @wiki.id, id: @page.id, page:{title: 'new title'}
       @page.reload
 
-      expect( response ).to redirect_to wiki_page_path
+      expect(response).to be_redirect
+      expect(@page.title).to eq('new title')
     end
 
     it "fails without a title" do
       invalid_title = ""
-      patch :update, wiki_id: @wiki.id, id: @page.id, page:{description: invalid_title}
+      patch :update, wiki_id: @wiki.id, id: @page.id, page:{title: invalid_title}
 
-      expect( response ).to redirect_to wiki_page_path
-      expect(flash[:error]).to eq "There was an error updating the page."
+      expect(response).to have_http_status(:success)
+      expect(flash[:error]).to eq "Page edit failed. Please try again."
     end
 
     it "fails without a description" do
       invalid_body = ""
-      patch :update, wiki_id: @wiki.id, id: @page.id, page:{description: invalid_body}
+      patch :update, wiki_id: @wiki.id, id: @page.id, page:{body: invalid_body}
 
-      expect( response ).to redirect_to wiki_page_path
-      expect(flash[:error]).to eq "There was an error updating the page."
+      expect(response).to have_http_status(:success)
+      expect(flash[:error]).to eq "Page edit failed. Please try again."
     end
   end
 end

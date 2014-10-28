@@ -36,10 +36,10 @@ class WikisController < ApplicationController
     @wiki = Wiki.friendly.find(params[:id])
     authorize @wiki
     if @wiki.update_attributes(wiki_params)
-      redirect_to @wiki, notice: "Wiki updated!"
+      redirect_to @wiki, notice: "Wiki edited!"
     else
-      flash[:error] = "Wiki failed. Please try again."
-      render :new
+      flash[:error] = "Wiki edit failed. Please try again."
+      render :edit
     end
   end
 

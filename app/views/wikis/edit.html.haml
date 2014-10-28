@@ -1,5 +1,5 @@
 %h1
-  Edit @wiki.title
+  Edit Wiki
 %div.row
 %div.col-md-8
   = form_for @wiki do |f|
@@ -14,4 +14,4 @@
         = f.check_box :private, id: 'wiki-private'
         Private Wiki
     %div.form-group
-      = f.submit "Update"
+      = f.submit "Edit"
