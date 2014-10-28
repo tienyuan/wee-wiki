@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :page do
-    title "MyPageTitle"
+    sequence(:title, 100) { |n| "MyPageTitle #{n}" }
     body "MyPageBody"
     wiki
   end

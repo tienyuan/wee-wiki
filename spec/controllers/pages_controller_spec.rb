@@ -94,4 +94,14 @@ describe Wikis::PagesController do
       expect(flash[:error]).to eq "Page edit failed. Please try again."
     end
   end
+
+  describe '#destroy' do
+    it "deletes with valid info" do
+      delete :destroy, wiki_id: @wiki.id, id: @page.id
+
+      expect(response).to be_redirect
+      expect(flash[:notice]).to eq "Page deleted!"
+      expect(Page.count).to eq(0)
+    end
+  end
 end

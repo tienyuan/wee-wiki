@@ -28,6 +28,15 @@ feature "User goes to wiki list to" do
     expect(page).to have_content('Page body')
   end
 
+  scenario "delete a wiki" do
+    visit wikis_path
+    click_link "Wiki title"
+    click_link "Page title"
+    click_link "Delete Page"
+      
+    expect(page).to have_content('Page deleted!')
+  end
+
   after do
     Warden.test_reset!
   end

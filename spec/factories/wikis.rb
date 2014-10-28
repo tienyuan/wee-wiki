@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :wiki do
-    title "MyTitle"
+    sequence(:title, 100) { |n| "MyWikiTitle #{n}" }
     description "MyText"
     private false
     owner { create(:user) }

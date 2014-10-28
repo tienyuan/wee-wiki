@@ -41,6 +41,19 @@ class Wikis::PagesController < ApplicationController
     end
   end
 
+  def destroy
+    @wiki = Wiki.friendly.find(params[:wiki_id])
+    @page = Page.friendly.find(params[:id])
+    authorize @page
+
+    if @page.destroy
+      redirect_to @wiki, notice: "Page deleted!"
+    else
+      flash[:error] = "Page delete failed. Please try again."
+      redirect_to [@wiki, @page]
+    end
+  end
+
   private
 
   def page_params
