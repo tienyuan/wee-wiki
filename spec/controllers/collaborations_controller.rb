@@ -34,6 +34,14 @@ describe Wikis::CollaborationsController do
 
       expect(flash[:error]).to eq "Collaborator failed. Please try again."
     end
+
+    it "fails with duplicate email" do
+      @collaboration = create(:collaboration, wiki: @wiki, user: @user)
+      params = {wiki_id: @wiki, user: {email: @user.email}}
+      post :create, params
+
+      expect(flash[:error]).to eq "Collaborator failed. Please try again."
+    end
   end
 
   describe '#destroy' do

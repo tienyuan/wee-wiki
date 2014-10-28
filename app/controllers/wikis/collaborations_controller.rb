@@ -4,8 +4,11 @@ class Wikis::CollaborationsController < ApplicationController
     @email = params[:user][:email]
     @user = User.where(email: @email).first if @email
     @wiki = Wiki.friendly.find(params[:wiki_id])
-    @collaboration = Collaboration.new(wiki: @wiki, user: @user) if @user 
-    
+
+    if new_collaboration?(@wiki, @user) && @user
+      @collaboration = Collaboration.new(wiki: @wiki, user: @user)
+    end
+
     authorize @collaboration if @collaboration
 
     if @collaboration
@@ -29,6 +32,16 @@ class Wikis::CollaborationsController < ApplicationController
     else
       flash[:error] = "Removal failed. Please try again."
       redirect_to @wiki
+    end
+  end
+
+  private 
+
+  def new_collaboration?(wiki, user)
+    if Collaboration.exists?(wiki: wiki, user: user)
+      false
+    else
+      true
     end
   end
 end
