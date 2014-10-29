@@ -18,7 +18,7 @@ users = User.all
   Wiki.create!(
     title:       Faker::Lorem.sentence(2),
     description: Faker::Lorem.sentence(5),
-    user: users.sample
+    owner: users.sample
     )
 end
 wikis = Wiki.all
