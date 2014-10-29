@@ -36,6 +36,7 @@ describe Wiki do
     before do
       @wiki = create(:wiki)
     end
+
     it { expect(@wiki).to validate_presence_of(:title).with_message( /can't be blank/ ) }
     it { expect(@wiki).to validate_uniqueness_of(:title) }
     it { expect(@wiki).to validate_presence_of(:description).with_message( /can't be blank/ ) }
@@ -45,6 +46,7 @@ describe Wiki do
     before do
       @wiki = create(:wiki)
     end
+    
     it { expect(@wiki).to belong_to(:owner) }
     it { expect(@wiki).to have_many(:pages) }
     it { expect(@wiki).to have_many(:users) }

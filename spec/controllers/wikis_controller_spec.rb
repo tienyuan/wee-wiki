@@ -13,20 +13,20 @@ RSpec.describe WikisController, :type => :controller do
     render_views
     
     it "shows public wikis, private owned wikis and private collaboration wikis" do
-      @public_wiki = create(:wiki)
-      @owned_wiki = create(:wiki, private: true, owner: @user)
-      @collaboration_wiki = create(:wiki, private: true)
-      @collaboration = create(:collaboration, wiki: @collaboration_wiki, user: @user)
-      @other_private_wiki = create(:wiki, private: true)
+      public_wiki = create(:wiki)
+      owned_wiki = create(:wiki, private: true, owner: @user)
+      collaboration_wiki = create(:wiki, private: true)
+      collaboration = create(:collaboration, wiki: collaboration_wiki, user: @user)
+      other_private_wiki = create(:wiki, private: true)
 
       get :index
       expect(response).to have_http_status(:success)
       expect(response).to render_template(:index)
       expect(Wiki.count).to eq(4)
-      expect(response.body).to include @public_wiki.title 
-      expect(response.body).to include @owned_wiki.title 
-      expect(response.body).to include @collaboration_wiki.title 
-      expect(response.body).not_to include @other_private_wiki.title 
+      expect(response.body).to include public_wiki.title 
+      expect(response.body).to include owned_wiki.title 
+      expect(response.body).to include collaboration_wiki.title 
+      expect(response.body).not_to include other_private_wiki.title 
     end
   end
 
@@ -79,9 +79,9 @@ RSpec.describe WikisController, :type => :controller do
     end
   end
 
-  describe "#edit" do
+  describe "#edit", focus: true do
     it "edits a page" do
-      @wiki = create(:wiki)
+      @wiki = create(:wiki, owner_id: @user.id)
       get :edit, {id: @wiki.id}
 
       expect(response).to have_http_status(:success)
@@ -90,8 +90,9 @@ RSpec.describe WikisController, :type => :controller do
   end
 
   describe '#update' do
+
     before do
-      @wiki = create(:wiki)
+      @wiki = create(:wiki, owner: @user)
     end
 
     it "updates with valid info" do
@@ -102,7 +103,7 @@ RSpec.describe WikisController, :type => :controller do
       expect(@wiki.title).to eq('new title')
     end
 
-    it "fails without a title" do
+    it "fails without a title " do
       invalid_title = ""
       patch :update, id: @wiki.id, wiki:{title: invalid_title}
 

@@ -3,6 +3,7 @@ class Wikis::PagesController < ApplicationController
   def show
     @wiki = Wiki.friendly.find(params[:wiki_id])
     @page = Page.friendly.find(params[:id])
+    authorize @page
   end
 
   def new

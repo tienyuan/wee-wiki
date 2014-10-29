@@ -6,6 +6,7 @@ class WikisController < ApplicationController
 
   def show
     @wiki = Wiki.friendly.find(params[:id])
+    authorize @wiki
     @pages = @wiki.pages
     @collaborations = @wiki.users
     @collaboration = Collaboration.new
@@ -17,7 +18,8 @@ class WikisController < ApplicationController
   end
 
   def create
-    @wiki = current_user.wikis.new(wiki_params)
+    @wiki = Wiki.new(wiki_params)
+    @wiki.owner = current_user
     authorize @wiki
     if @wiki.save
       redirect_to @wiki, notice: "Wiki created!"
@@ -35,7 +37,7 @@ class WikisController < ApplicationController
   def update
     @wiki = Wiki.friendly.find(params[:id])
     authorize @wiki
-    if @wiki.update_attributes(wiki_params)
+    if @wiki.update_attributes(wiki_params) 
       redirect_to @wiki, notice: "Wiki edited!"
     else
       flash[:error] = "Wiki edit failed. Please try again."
@@ -46,11 +48,6 @@ class WikisController < ApplicationController
   private
 
   def wiki_params
-    params.require(:wiki).permit(:title, :description, :private) 
+    params.require(:wiki).permit(:title, :description, :private, :owner_id) 
   end
-
-  def set_user
-
-  end
-
 end

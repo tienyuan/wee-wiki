@@ -5,6 +5,7 @@
 %p
   - if current_user
     = link_to "Add Page", new_wiki_page_path(@wiki)
+  - if current_user && (current_user == @wiki.owner || @wiki.private == false)
     = link_to "Edit Wiki", edit_wiki_path(@wiki)
 
 %h4 Wiki Pages
