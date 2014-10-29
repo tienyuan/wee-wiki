@@ -5,7 +5,7 @@ class WikiPolicy < ApplicationPolicy
   end
 
   def show?
-    (user.present? && user == record.owner) || (user.present? && record.users.exists?(user)) || (record.private == false)
+    (user.present? && User.allowed_users(record).include?(user)) || record.private == false
   end
 
   def update?

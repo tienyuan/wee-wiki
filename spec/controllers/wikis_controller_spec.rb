@@ -90,7 +90,6 @@ RSpec.describe WikisController, :type => :controller do
   end
 
   describe '#update' do
-
     before do
       @wiki = create(:wiki, owner: @user)
     end
