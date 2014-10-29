@@ -1,5 +1,24 @@
 require 'faker'
 
+# Create Example User
+example_user = User.new(
+  name:     'Example User',
+  username: 'example',
+  email:    'user@example.com', 
+  password: 'password'
+)
+example_user.skip_confirmation!
+example_user.save!
+
+collab_user = User.new(
+  name:     'Collaborator',
+  username: 'collab',
+  email:    'collab@example.com', 
+  password: 'password'
+)
+collab_user.skip_confirmation!
+collab_user.save!
+
 # Create Users
 5.times do
   user = User.new(
@@ -13,18 +32,28 @@ require 'faker'
 end
 users = User.all
 
-# Create Wikis
-5.times do
+# Create Public Wikis
+8.times do
   Wiki.create!(
     title:       Faker::Lorem.sentence(2),
     description: Faker::Lorem.sentence(5),
     owner: users.sample
     )
 end
+
+# Create Private Wikis
+4.times do
+  Wiki.create!(
+    title:       Faker::Lorem.sentence(2),
+    description: Faker::Lorem.sentence(5),
+    owner: example_user,
+    private: true
+    )
+end
 wikis = Wiki.all
 
 # Create Pages
-20.times do 
+24.times do 
   page = Page.create!(
     wiki:  wikis.sample,
     title:  Faker::Lorem.sentence,
@@ -32,15 +61,6 @@ wikis = Wiki.all
     )
 end
 pages = Page.all
-
-example_user = User.new(
-  name:     'Example User',
-  username: 'example',
-  email:    'user@example.com', 
-  password: 'password'
-)
-example_user.skip_confirmation!
-example_user.save!
 
 puts "Seed finished"
 puts "#{User.count} users created"
