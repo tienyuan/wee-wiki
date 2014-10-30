@@ -76,5 +76,5 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
-  config.action_mailer.default_url_options = { host: 'https://tienyuan-weewiki.herokuapp.com' }
+  config.action_mailer.default_url_options = { host: 'tienyuan-weewiki.herokuapp.com' }
 end
