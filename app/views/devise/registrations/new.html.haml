@@ -7,11 +7,7 @@
       %div.form-group
         = devise_error_messages! 
       %div.form-group
-        = f.label :name
-        = f.text_field :name, autofocus: true, class: 'form-control'
-      %div.form-group
-        = f.label :username
-        = f.text_field :username, class: 'form-control' 
+        Account Info
       %div.form-group
         = f.label :email
         = f.email_field :email, class: 'form-control'
@@ -25,6 +21,15 @@
       %div.form-group
         = f.label :password_confirmation
         = f.password_field :password_confirmation, autocomplete: "off", class: 'form-control'
+      %div.form-group
+        %hr
+        Personal Info
+      %div.form-group
+        = f.label :name
+        = f.text_field :name, autofocus: true, class: 'form-control'
+      %div.form-group
+        = f.label :username
+        = f.text_field :username, class: 'form-control' 
       %div.form-group
         = f.submit "Sign up", class: 'btn btn-primary'
       %div.form-group
