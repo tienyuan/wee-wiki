@@ -1,13 +1,7 @@
 %h1 Create Page
-%div.row
-  %div.col-md-8
-    = form_for [@wiki, @page] do |f|
-      %div.form-group
-        = f.label :title
-        = f.text_field :title, id: 'page-title', class: 'form-control'
-      %div.form-group
-        = f.label :body
-        = f.text_area :body, id: 'page-body', rows: '10', class: 'form-control '
-      %div.form-group
-        = f.submit "Add", class: 'btn btn-primary'
-        = link_to "Cancel", @wiki, class: 'btn btn-default'
+
+%p
+  %em  
+    = @wiki.title
+    
+= render partial: 'form', locals: {wiki: @wiki, page: @page}

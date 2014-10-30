@@ -19,7 +19,7 @@ feature "User creates a page" do
     fill_in 'page-body', with: "Page body"
 
     within 'form' do
-      click_button 'Add'
+      click_button 'Submit'
     end
       
     expect(page).to have_content('Page added!')
@@ -35,7 +35,7 @@ feature "User creates a page" do
     fill_in 'page-body', with: "Page body"
 
     within 'form' do
-      click_button 'Add'
+      click_button 'Submit'
     end
       
     expect(page).to have_content("Page failed.")
@@ -49,7 +49,7 @@ feature "User creates a page" do
     fill_in 'page-body', with: ""
 
     within 'form' do
-      click_button 'Add'
+      click_button 'Submit'
     end
       
     expect(page).to have_content("Page failed.")

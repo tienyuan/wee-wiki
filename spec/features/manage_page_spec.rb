@@ -12,14 +12,14 @@ feature "User goes to wiki list to" do
     login_as(@user, :scope => :user)
   end
 
-  scenario "edit a wiki" do
+  scenario "edit a page" do
     visit wikis_path
     click_link "Wiki title"
     click_link "Page title"
     click_link "Edit Page"
     fill_in 'page-title', with: "New page title"
     within 'form' do
-      click_button 'Edit'
+      click_button 'Submit'
     end
       
     expect(page).to have_content('Page edited!')
@@ -27,7 +27,7 @@ feature "User goes to wiki list to" do
     expect(page).to have_content('Page body')
   end
 
-  scenario "delete a wiki" do
+  scenario "delete a page" do
     visit wikis_path
     click_link "Wiki title"
     click_link "Page title"
