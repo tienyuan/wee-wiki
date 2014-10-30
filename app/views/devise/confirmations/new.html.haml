@@ -1,0 +1,15 @@
+%div.row
+  %div.col-md-12
+    %h2 Resend confirmation instructions
+%div.row
+  %div.col-md-6
+    = form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| 
+      %div.form-group
+        = devise_error_messages! 
+      %div.form-group
+        = f.label :email
+        = f.email_field :email, autofocus: true, class: 'form-control'
+      %div.form-group
+        = f.submit "Resend confirmation instructions", class: 'btn btn-primary'
+      %div.form-group
+        = render "devise/shared/links"
