@@ -6,7 +6,7 @@ feature "User goes to wiki list to" do
   Warden.test_mode!
 
   before do
-    @user = create(:user)
+    @user = create(:user, premium: true)
     login_as(@user, :scope => :user)
   end
 
