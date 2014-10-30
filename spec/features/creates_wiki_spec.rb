@@ -16,7 +16,7 @@ feature "User goes to wiki list to" do
     fill_in 'wiki-title', with: "Wiki title"
     fill_in 'wiki-description', with: "Wiki description"
     within 'form' do
-      click_button 'Create'
+      click_button 'Submit'
     end
       
     expect(page).to have_content('Wiki created!')
@@ -31,7 +31,7 @@ feature "User goes to wiki list to" do
     fill_in 'wiki-description', with: "Private wiki description"
     check('wiki-private')
     within 'form' do
-      click_button 'Create'
+      click_button 'Submit'
     end
       
     expect(page).to have_content('Wiki created!')
@@ -46,7 +46,7 @@ feature "User goes to wiki list to" do
     fill_in 'wiki-title', with: ""
     fill_in 'wiki-description', with: "Wiki description"
     within 'form' do
-      click_button 'Create'
+      click_button 'Submit'
     end
       
     expect(page).to have_content("Wiki failed.")
@@ -58,7 +58,7 @@ feature "User goes to wiki list to" do
     fill_in 'wiki-title', with: "Wiki title"
     fill_in 'wiki-description', with: ""
     within 'form' do
-      click_button 'Create'
+      click_button 'Submit'
     end
       
     expect(page).to have_content("Wiki failed.")
