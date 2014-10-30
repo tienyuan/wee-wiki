@@ -5,7 +5,8 @@ example_user = User.new(
   name:     'Example User',
   username: 'example',
   email:    'user@example.com', 
-  password: 'password'
+  password: 'password',
+  premium: true
 )
 example_user.skip_confirmation!
 example_user.save!

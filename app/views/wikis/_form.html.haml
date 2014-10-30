@@ -7,10 +7,14 @@
       %div.form-group
         = f.label :description
         = f.text_field :description, id: 'wiki-description', class: 'form-control'
-      %div.form-group
-        = f.label :private, class: 'checkbox' do
-          = f.check_box :private, id: 'wiki-private'
-          Private Wiki
+      - if current_user.premium == true
+        %div.form-group
+          = f.label :private, class: 'checkbox' do
+            = f.check_box :private, id: 'wiki-private'
+            Private Wiki
+      - else
+        %div.form-group
+          Upgrade for $100 for Private Wikis!
       %div.form-group
         = f.submit "Submit", class: 'btn btn-primary'
         = link_to "Cancel", @wiki, class: 'btn btn-default'
