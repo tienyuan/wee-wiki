@@ -13,10 +13,10 @@ class Wiki < ActiveRecord::Base
 
   def self.viewable_wikis(user)
     if user
-      public_wikis = Wiki.where(private: false) #public
-      owned_wikis = Wiki.where(owner_id: user.id)
+      public_wikis = Wiki.where(private: false)
+      owned_wikis = Wiki.where("owner_id = ? AND private = ?", user.id, true)
       collaborations_wikis = user.wikis
-      public_wikis + owned_wikis + collaborations_wikis
+      (public_wikis + owned_wikis + collaborations_wikis)
     else
       Wiki.where(private: false)
     end
