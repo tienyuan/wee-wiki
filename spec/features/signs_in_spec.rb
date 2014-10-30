@@ -9,6 +9,7 @@ feature "Visitor signs in" do
     signs_in_with(@user.email, @user.password)
 
     expect(current_path).to eq wikis_path 
+    expect(page).to have_content('Browse Wikis')
   end
 
   scenario "with invalid email" do
@@ -27,7 +28,7 @@ feature "Visitor signs in" do
     visit wikis_path
 
     expect(current_path).to eq wikis_path
-    expect(page).to have_content('Wiki List')
+    expect(page).to have_content('Browse Wikis')
   end
 
   private
