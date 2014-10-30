@@ -1,12 +1,17 @@
-%h1 Wiki List
 %div.row
-  %div.col-md-8
+  %div.col-md-12
+    %h1 Wiki List
     - if current_user
-      = link_to "Create Wiki", new_wiki_path
+      = link_to "Create Wiki", new_wiki_path, class: 'btn btn-primary'
+    %hr
 %div.row
   %div.col-md-8
     - @wikis.each do |wiki|
-      %h4
-        = link_to wiki.title, wiki
-      %em
-        = wiki.description
+      %div.media
+        %div.media-body
+          %h4.media-heading
+            = link_to wiki.title, wiki
+            - if wiki.private
+              <span class="glyphicon glyphicon-lock"></span>
+          %em
+            = wiki.description

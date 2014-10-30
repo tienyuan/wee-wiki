@@ -27,12 +27,15 @@
     %div.container
       %div.row.alertrow
         - if flash[:notice]
-          %div.alert.alert-success 
+          %div.alert.alert-success
+            %button.close{:type => "button", :'data-dismiss' => "alert"} &times; 
             = flash[:notice]
         - elsif flash[:alert]
           %div.alert.alert.alert-warning  
+            %button.close{:type => "button", :'data-dismiss' => "alert"} &times; 
             = flash[:alert]
         - elsif flash[:error]
           %div.alert.alert.alert-danger  
+            %button.close{:type => "button", :'data-dismiss' => "alert"} &times; 
             = flash[:error]
       = yield

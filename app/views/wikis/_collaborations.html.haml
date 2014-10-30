@@ -1,7 +1,6 @@
 = form_for [wiki, collaboration] do |f|
-  %div.form-group
+  %div.input-group
     = fields_for :user do |user_fields| 
-      = user_fields.label :email, "Enter Collaborator Email"
-      = user_fields.text_field :email, id: 'user-email', class: 'form-control'
-  %div.form-group
-    = f.submit "Add"
+      = user_fields.text_field :email, placeholder: 'Enter Email', id: 'user-email', class: 'form-control'
+    %span.input-group-btn
+      = f.submit "Add User", class: 'btn btn-default'
