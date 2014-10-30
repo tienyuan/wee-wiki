@@ -7,6 +7,7 @@
         = f.text_field :title, id: 'page-title', class: 'form-control'
       %div.form-group
         = f.label :body
-        = f.text_area :body, id: 'page-body', class: 'form-control'
+        = f.text_area :body, id: 'page-body', rows: '10', class: 'form-control '
       %div.form-group
-        = f.submit "Add"
+        = f.submit "Add", class: 'btn btn-primary'
+        = link_to "Cancel", @wiki, class: 'btn btn-default'
