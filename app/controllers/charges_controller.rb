@@ -23,7 +23,7 @@ class ChargesController < ApplicationController
       currency: 'usd'
     )
    
-    flash[:success] = "Thanks for upgrading, #{current_user.email}! You can now create private wikis."
+    flash[:notice] = "Thanks for upgrading, #{current_user.email}! You can now create private wikis."
     enable_premium(current_user)
     redirect_to wikis_path 
    
