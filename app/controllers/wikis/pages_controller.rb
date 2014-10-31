@@ -33,6 +33,7 @@ class Wikis::PagesController < ApplicationController
   def update
     @wiki = Wiki.friendly.find(params[:wiki_id])
     @page = Page.friendly.find(params[:id])
+    @page.slug = nil
     authorize @page
     if @page.update_attributes(page_params)
       redirect_to [@wiki, @page], notice: "Page edited!"

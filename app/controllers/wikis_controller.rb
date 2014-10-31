@@ -36,6 +36,7 @@ class WikisController < ApplicationController
 
   def update
     @wiki = Wiki.friendly.find(params[:id])
+    @wiki.slug = nil
     authorize @wiki
     if @wiki.update_attributes(wiki_params) 
       redirect_to @wiki, notice: "Wiki edited!"
