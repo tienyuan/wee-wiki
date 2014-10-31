@@ -1,0 +1,27 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="jumbotron">
+      <h2>Premium User Upgrade</h2>
+      <p>For only $10.00, you can make as many private wikis as you want!</p>
+
+      <% if current_user %>
+        <% if current_user.premium == false %>
+          <%= form_tag charges_path do %>
+            <script class='stripe-button' src="https://checkout.stripe.com/checkout.js" 
+              data-key="<%= @stripe_btn_data[:key] %>" 
+              data-amount="<%= @stripe_btn_data[:amount] %>"
+              data-description="<%= @stripe_btn_data[:description] %>"
+              data-email="<%= @stripe_btn_data[:email] %>"  
+              >
+            </script>
+          <% end %>
+        <% else %>
+          <h3> Thanks! You're upgraded. </h3>
+        <% end %>
+      <% else %>
+        <h2>Start by Signing up for an Account</h2>
+        <%= link_to "Sign Up", new_user_registration_path, class: 'btn btn-primary' %>
+      <% end %>
+    </div>
+  </div>
+</div>

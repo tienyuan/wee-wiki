@@ -16,7 +16,7 @@ gem 'devise'
 gem 'pundit'
 gem 'friendly_id'
 gem 'redcarpet'
-gem 'stripe'
+gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
 
 group :production do
   gem 'rails_12factor'

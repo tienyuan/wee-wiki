@@ -18,6 +18,8 @@
             %li
               = link_to (current_user.username), edit_user_registration_path
             %li
+              = link_to "Upgrade", new_charge_path
+            %li
               = link_to destroy_user_session_path, method: :delete do
                 Sign Out
           - else

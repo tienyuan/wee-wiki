@@ -1,14 +1,14 @@
 %div.row
   %div.col-md-12
-    %h1 Wee Wiki
-    %p Create and share Wikis
-    %p Become a user and Create as many public wikis as you want!
-    %p Then upgrade for $100 and create private wikis!
- 
-    %h2 Ready to Start?
-    - if current_user
-      = link_to "Create a Wiki", new_wiki_path, class: 'btn btn-primary'
-      OR
-      Upgrade Your Account
-    - else
-      = link_to "Sign Up for an Account", new_user_registration_path
+    %div.jumbotron
+      %h2 Create and Share Wikis
+      %p Create as many public wikis as you want. Or upgrade for private wikis!
+
+      %h3 Ready to Start?
+      - if current_user
+        = link_to "Create a Wiki", new_wiki_path, class: 'btn btn-primary'
+        - if current_user.premium == false
+          OR
+          = link_to "Upgrade Your Account", new_charge_path, class: 'btn btn-primary'
+      - else
+        = link_to "Sign Up for an Account", new_user_registration_path
