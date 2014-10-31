@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature "User attempts to upgrade" do
+feature "User attempts to upgrade", js: true do
 
   include Warden::Test::Helpers
   Warden.test_mode!
@@ -12,18 +12,15 @@ feature "User attempts to upgrade" do
 
   xscenario "when signed in" do
     visit new_charge_path
-    click_link "Pay With Card"
+    stripe = page.driver.window_handles.last
+    click_button '<span style="display: block; min-height: 30px;">Pay with Card</span>'
+    
     fill_in 'card-number', with: "4242 4242 4242 4242"
     fill_in 'cc-exp', with: "12/20"
     fill_in 'cc-csc', with: "123"
-    # within 'form' do
-    #   click_button 'Pay $10.00'
-    # end
-      
-    expect(page).to have_content('Browse Wikis')
-    
-    visit new_wiki_path
-    expect(page).to have_content('Private Wiki')
+    within 'form' do
+      click_button 'Pay $10.00'
+    end
   end
 
   after do
