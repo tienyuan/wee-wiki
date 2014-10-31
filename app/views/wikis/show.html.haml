@@ -21,7 +21,7 @@
         %li
           = link_to page.title, wiki_page_path(@wiki, page)
   %div.col-md-4
-    - if @wiki.private == true
+    - if @wiki.private
       %h4 Collaborators
       %p Users who can edit and add pages to this wiki.
       %p

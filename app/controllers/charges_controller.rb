@@ -27,11 +27,13 @@ class ChargesController < ApplicationController
     enable_premium(current_user)
     redirect_to wikis_path 
    
-    rescue Stripe::CardError => e
-      flash[:error] = e.message
-      redirect_to new_charge_path
-    end
+  rescue Stripe::CardError => e
+    flash[:error] = e.message
+    redirect_to new_charge_path
+  end
 
+  private
+  
   def enable_premium(current_user)
     paid_user = User.find(current_user.id)
     paid_user.update_attributes(premium: true) 

@@ -18,18 +18,11 @@ describe ChargesController, :type => :controller do
 
       expect(response).to have_http_status(:success)
       expect(response).to render_template(:new)
-      expect(response.body).to include('Premium User Upgrade')
-    end
-  end
-
-  describe "#create" do
-    xit "creates with valid email, and credit card info" do
-      params = {}
-      post :create, params
-
-      expect(response).to be_redirect
-      expect(flash[:notice]).to eq "Thanks for upgrading, #{@user.email}! You can now create private wikis."
-      expect(@user.premium).to eq true
+      expect(response.body).to include('script class=\'stripe-button\' src="https://checkout.stripe.com/checkout.js"')
+      expect(response.body).to include('data-key')
+      expect(response.body).to include('data-amount="1000"')
+      expect(response.body).to include('data-description="Premium User Upgrade"')
+      expect(response.body).to include('data-email="' + @user.email)
     end
   end
 end
