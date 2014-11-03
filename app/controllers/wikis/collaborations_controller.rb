@@ -1,9 +1,9 @@
 class Wikis::CollaborationsController < ApplicationController
+before_action :set_wiki
 
   def create
     @email = params[:user][:email]
     @user = User.where(email: @email).first if @email
-    @wiki = Wiki.friendly.find(params[:wiki_id])
 
     if new_collaboration?(@wiki, @user) && @user
       @collaboration = Collaboration.new(wiki: @wiki, user: @user)
@@ -21,7 +21,6 @@ class Wikis::CollaborationsController < ApplicationController
   end
 
   def destroy
-    @wiki = Wiki.friendly.find(params[:wiki_id])
     @user = User.find(params[:id])
     @collaboration = Collaboration.where(wiki: @wiki, user: @user).first
 
@@ -36,6 +35,10 @@ class Wikis::CollaborationsController < ApplicationController
   end
 
   private 
+
+  def set_wiki
+    @wiki = Wiki.friendly.find(params[:wiki_id])
+  end
 
   def new_collaboration?(wiki, user)
     if Collaboration.exists?(wiki: wiki, user: user)

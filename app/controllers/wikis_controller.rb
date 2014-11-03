@@ -1,11 +1,11 @@
 class WikisController < ApplicationController
+  before_action :set_wiki, only: [:show, :edit, :update]
 
   def index
     @wikis = Wiki.viewable_wikis(current_user)
   end
 
   def show
-    @wiki = Wiki.friendly.find(params[:id])
     authorize @wiki
     @pages = @wiki.pages
     @collaborations = @wiki.users
@@ -30,12 +30,10 @@ class WikisController < ApplicationController
   end
 
   def edit
-    @wiki = Wiki.friendly.find(params[:id])
     authorize @wiki
   end
 
   def update
-    @wiki = Wiki.friendly.find(params[:id])
     @wiki.slug = nil
     authorize @wiki
     if @wiki.update_attributes(wiki_params) 
@@ -47,6 +45,10 @@ class WikisController < ApplicationController
   end
 
   private
+
+  def set_wiki
+    @wiki = Wiki.friendly.find(params[:id])
+  end
 
   def wiki_params
     params.require(:wiki).permit(:title, :description, :private, :owner_id) 
