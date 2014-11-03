@@ -1,19 +1,17 @@
 class Wikis::PagesController < ApplicationController
+  before_action :set_wiki
+  before_action :set_page, only: [:show, :edit, :update, :destroy]
 
   def show
-    @wiki = Wiki.friendly.find(params[:wiki_id])
-    @page = Page.friendly.find(params[:id])
     authorize @page
   end
 
   def new
-    @wiki = Wiki.friendly.find(params[:wiki_id])
     @page = Page.new
     authorize @page
   end
 
   def create
-    @wiki = Wiki.friendly.find(params[:wiki_id])
     @page = @wiki.pages.new(page_params)
     authorize @page
     if @page.save
@@ -25,14 +23,10 @@ class Wikis::PagesController < ApplicationController
   end
 
   def edit
-    @wiki = Wiki.friendly.find(params[:wiki_id])
-    @page = Page.friendly.find(params[:id])
     authorize @page
   end
 
   def update
-    @wiki = Wiki.friendly.find(params[:wiki_id])
-    @page = Page.friendly.find(params[:id])
     @page.slug = nil
     authorize @page
     if @page.update_attributes(page_params)
@@ -44,8 +38,6 @@ class Wikis::PagesController < ApplicationController
   end
 
   def destroy
-    @wiki = Wiki.friendly.find(params[:wiki_id])
-    @page = Page.friendly.find(params[:id])
     authorize @page
 
     if @page.destroy
@@ -60,5 +52,13 @@ class Wikis::PagesController < ApplicationController
 
   def page_params
     params.require(:page).permit(:title, :body) 
+  end
+
+  def set_wiki
+    @wiki = Wiki.friendly.find(params[:wiki_id])
+  end
+
+  def set_page
+    @page = Page.friendly.find(params[:id])
   end
 end
