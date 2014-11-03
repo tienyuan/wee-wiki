@@ -1,11 +1,11 @@
 class Wikis::CollaborationsController < ApplicationController
-before_action :set_wiki
+  before_action :set_wiki
 
   def create
     @email = params[:user][:email]
     @user = User.where(email: @email).first if @email
 
-    if new_collaboration?(@wiki, @user) && @user
+    if @user && new_collaboration?(@wiki, @user) 
       @collaboration = Collaboration.new(wiki: @wiki, user: @user)
     end
 
@@ -41,10 +41,6 @@ before_action :set_wiki
   end
 
   def new_collaboration?(wiki, user)
-    if Collaboration.exists?(wiki: wiki, user: user)
-      false
-    else
-      true
-    end
+    true unless Collaboration.exists?(wiki: wiki, user: user)
   end
 end
