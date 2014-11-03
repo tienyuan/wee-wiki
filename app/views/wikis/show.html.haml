@@ -6,10 +6,11 @@
         %small <span class="glyphicon glyphicon-lock"></span>
     %div 
       = markdown @wiki.description
-      %div.pull-right
-        - if current_user && (current_user == @wiki.owner || @wiki.private == false)
+      
+      - if policy(@wiki).update?
+        %div.pull-right
           = link_to "Edit Wiki", edit_wiki_path(@wiki), class: 'btn btn-default'
-      - if current_user
+      - if policy(@wiki).show?
         = link_to "Add Page", new_wiki_page_path(@wiki), class: 'btn btn-primary'
     %hr
 %div.row
@@ -24,8 +25,8 @@
     - if @wiki.private
       %h4 Collaborators
       %p Users who can edit and add pages to this wiki.
-      %p
-        - if current_user && (current_user == @wiki.owner || @wiki.private == false)
+      - if policy(@wiki).update?
+        %p
           = render partial: 'collaborations', locals: {wiki: @wiki, collaboration: @collaboration}
       %ul.list-group
         - if @collaborations.empty?
