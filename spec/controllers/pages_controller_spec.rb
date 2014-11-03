@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Wikis::PagesController do
+describe Wikis::PagesController, :type => :controller  do
 
   include Devise::TestHelpers
 

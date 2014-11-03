@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe WikisController, :type => :controller do
+describe WikisController, :type => :controller do
 
   include Devise::TestHelpers
 
