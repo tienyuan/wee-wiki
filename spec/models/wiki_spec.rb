@@ -17,7 +17,7 @@ describe Wiki do
     end
   end
 
-  describe ".viewable_wikis(user) when user is nil", focus: true do
+  describe ".viewable_wikis(user) when user is nil" do
     it "returns public wikis" do
       user = nil
       public_wiki = create(:wiki)

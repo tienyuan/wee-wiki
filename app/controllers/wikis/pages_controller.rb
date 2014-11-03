@@ -7,7 +7,7 @@ class Wikis::PagesController < ApplicationController
   end
 
   def new
-    @page = Page.new
+    @page = @wiki.pages.new
     authorize @page
   end
 
