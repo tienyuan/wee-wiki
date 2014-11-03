@@ -10,16 +10,19 @@ feature "User attempts to upgrade", js: true do
     login_as(@user, :scope => :user)
   end
 
+  # This test has been commented out to prevent accidental abuse during development.
+  # Uncomment the scenario when you wish to run the test against stripe's test server
   xscenario "when signed in" do
     visit new_charge_path
-    stripe = page.driver.window_handles.last
-    click_button '<span style="display: block; min-height: 30px;">Pay with Card</span>'
-    
-    fill_in 'card-number', with: "4242 4242 4242 4242"
-    fill_in 'cc-exp', with: "12/20"
-    fill_in 'cc-csc', with: "123"
-    within 'form' do
-      click_button 'Pay $10.00'
+    click_button 'Pay with Card'
+    sleep(8)
+    within_frame('stripe_checkout_app') do
+      fill_in 'card_number', with: "4242 4242 4242 4242"
+      fill_in 'cc-exp', with: "12/20"
+      fill_in 'cc-csc', with: "123"
+      within 'form' do
+        click_button 'Pay $10.00'
+      end
     end
   end
 
