@@ -2,7 +2,7 @@
   <div class="col-md-12">
     <div class="jumbotron">
       <h2>Premium User Upgrade</h2>
-      <p>For only $10.00, you can make as many private wikis as you want!</p>
+      <p>For only $<%= @subscription %>, you can make as many private wikis as you want!</p>
 
       <% if current_user %>
         <% if current_user.premium == false %>

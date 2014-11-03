@@ -14,7 +14,9 @@
             Private Wiki
       - else
         %div.form-group
-          Upgrade for $100 for Private Wikis!
+          Upgrade for $
+          = @subscription
+          for Private Wikis!
       %div.form-group
         = f.submit "Submit", class: 'btn btn-primary'
         = link_to "Cancel", @wiki, class: 'btn btn-default'

@@ -1,10 +1,11 @@
 class ChargesController < ApplicationController
   def new
     if current_user
+      @subscription = Subscription.DEFAULT / 100
       @stripe_btn_data = {
         key: "#{Rails.configuration.stripe[:publishable_key]}",
         description: "Premium User Upgrade",
-        amount: 1000, 
+        amount: Subscription.DEFAULT, 
         email: current_user.email
       }
     end
@@ -18,13 +19,13 @@ class ChargesController < ApplicationController
    
     charge = Stripe::Charge.create(
       customer: customer.id,
-      amount: 1000, #Amount.default
+      amount: Subscription.DEFAULT,
       description: "Premium User Upgrade",
       currency: 'usd'
     )
    
     flash[:notice] = "Thanks for upgrading, #{current_user.email}! You can now create private wikis."
-    enable_premium(current_user)
+    enable_premium
     redirect_to wikis_path 
    
   rescue Stripe::CardError => e
@@ -34,9 +35,8 @@ class ChargesController < ApplicationController
 
   private
   
-  def enable_premium(current_user)
-    paid_user = User.find(current_user.id)
-    paid_user.update_attributes(premium: true) 
+  def enable_premium
+    current_user.update_attributes(premium: true) 
   end
 end
 
