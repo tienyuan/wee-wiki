@@ -8,9 +8,9 @@ feature "User adds collaborators" do
   before do
     @user = create(:user)
     @collaborator = create(:user)
-    login_as(@user, :scope => :user)
     @public_wiki = create(:wiki, title: 'public wiki title')
     @private_wiki = create(:wiki, title: 'private wiki title', description: 'wiki description', private: true, owner: @user)
+    login_as(@user, :scope => :user)
   end
 
   scenario "to private wiki using a valid user email and then removes it" do

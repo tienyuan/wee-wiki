@@ -5,7 +5,7 @@
       - if @wiki.private
         %small <span class="glyphicon glyphicon-lock"></span>
     %div 
-      = markdown @wiki.description
+      = show_markdown_html @wiki.description
       
       - if policy(@wiki).update?
         %div.pull-right

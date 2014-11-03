@@ -5,7 +5,7 @@
       - if @wiki.private
         %small <span class="glyphicon glyphicon-lock"></span>
     %div 
-      = markdown @wiki.description
+      = show_markdown_html @wiki.description
       = link_to "Back to Index", @wiki, class: 'btn btn-primary'
     %hr
 %div.row
@@ -13,7 +13,7 @@
     %h2
       = @page.title
     %p 
-      = markdown @page.body
+      = show_markdown_html @page.body
   %div.col-md-4
     %div.pull-right
       %br 

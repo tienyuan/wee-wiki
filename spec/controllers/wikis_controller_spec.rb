@@ -34,13 +34,13 @@ describe WikisController, :type => :controller do
     render_views
 
     it "shows with a valid wiki" do
-      @wiki = create(:wiki)
-      get :show, {id: @wiki.id}
+      wiki = create(:wiki)
+      get :show, {id: wiki.id}
 
       expect(response).to have_http_status(:success)
       expect(response).to render_template(:show)
-      expect(response.body).to include @wiki.title
-      expect(response.body).to include @wiki.description
+      expect(response.body).to include wiki.title
+      expect(response.body).to include wiki.description
     end
   end
 
