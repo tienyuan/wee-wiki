@@ -1,11 +1,11 @@
 class ChargesController < ApplicationController
   def new
     if current_user
-      @subscription = Subscription.DEFAULT / 100
+      @subscription_price = Subscription.pretty_price
       @stripe_btn_data = {
         key: "#{Rails.configuration.stripe[:publishable_key]}",
         description: "Premium User Upgrade",
-        amount: Subscription.DEFAULT, 
+        amount: Subscription.price_cents, 
         email: current_user.email
       }
     end
@@ -19,7 +19,7 @@ class ChargesController < ApplicationController
    
     charge = Stripe::Charge.create(
       customer: customer.id,
-      amount: Subscription.DEFAULT,
+      amount: Subscription.price_cents,
       description: "Premium User Upgrade",
       currency: 'usd'
     )

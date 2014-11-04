@@ -13,7 +13,7 @@ class WikisController < ApplicationController
   end
 
   def new
-    @subscription = Subscription.DEFAULT / 100
+    @subscription_price = Subscription.pretty_price
     @wiki = Wiki.new
     authorize @wiki
   end
