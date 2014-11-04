@@ -41,6 +41,6 @@ class Wikis::CollaborationsController < ApplicationController
   end
 
   def new_collaboration?(wiki, user)
-    true unless Collaboration.exists?(wiki: wiki, user: user)
+    !Collaboration.exists?(wiki: wiki, user: user)
   end
 end

@@ -6,8 +6,8 @@ describe 'welcome/index.html.haml' do
 
   context 'current_user' do
     it 'can see wiki link' do
-      assign(:current_user, User.new)
-      sign_in
+      @user = create(:user)
+      sign_in @user
 
       render
 
@@ -17,7 +17,6 @@ describe 'welcome/index.html.haml' do
 
   context 'visitor' do
     it "can see sign up link" do
-      assign(:current_user, User.new)
 
       render
 
