@@ -5,14 +5,14 @@ class PagePolicy < ApplicationPolicy
   end
 
   def show?
-    (user.present? && User.allowed_users(record.wiki).include?(user))  || record.wiki.private == false
+    (user.present? && User.allowed_users(record.wiki).include?(user))  || !record.wiki.private
   end
 
   def create?
-    (user.present? && User.allowed_users(record.wiki).include?(user))  || (user.present? && record.wiki.private == false)
+    (user.present? && User.allowed_users(record.wiki).include?(user))  || (user.present? && !record.wiki.private)
   end
 
   def update?
-    (user.present? && User.allowed_users(record.wiki).include?(user))  || (user.present? && record.wiki.private == false)
+    (user.present? && User.allowed_users(record.wiki).include?(user))  || (user.present? && !record.wiki.private)
   end
 end
