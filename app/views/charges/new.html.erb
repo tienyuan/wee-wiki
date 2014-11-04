@@ -6,6 +6,7 @@
 
       <% if current_user %>
         <% if !current_user.premium %>
+          We accept all major credit cards.
           <%= form_tag charges_path do %>
             <script class='stripe-button' src="https://checkout.stripe.com/checkout.js" 
               data-key="<%= @stripe_btn_data[:key] %>" 
