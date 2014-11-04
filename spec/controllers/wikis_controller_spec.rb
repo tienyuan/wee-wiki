@@ -79,7 +79,7 @@ describe WikisController, :type => :controller do
     end
   end
 
-  describe "#edit", focus: true do
+  describe "#edit" do
     it "edits a page" do
       @wiki = create(:wiki, owner_id: @user.id)
       get :edit, {id: @wiki.id}
