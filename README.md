@@ -1,4 +1,4 @@
-## Wee Wiki: a Reddit clone to teach the fundamentals of web development and Rails 4.
+## Wee Wiki
 
 Description
 ======================
@@ -26,4 +26,4 @@ Run `rspec/spec` to test the application.
 
 FYI, a JS dependent feature (spec/features/upgrade_user_spec.rb) is tested using [poltergeist](http://phantomjs.org/) and [phantomjs](http://phantomjs.org/). Running this test will require additional setup. 
 
-Run 'rspec -t stripe_integration' to test stripe integration which is excluded by default.
+Run `rspec -t stripe_integration` to test stripe integration which is excluded by default.

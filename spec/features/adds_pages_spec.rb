@@ -2,10 +2,8 @@ require 'rails_helper'
 
 feature "User creates a page", :type => :feature do
 
-  include Warden::Test::Helpers
-
   before do
-    setAuth
+    set_auth
     @user = create(:user)
     login_as(@user, :scope => :user)
     wiki = create(:wiki, title: 'Wiki title', description: 'Wiki description')
@@ -56,7 +54,7 @@ feature "User creates a page", :type => :feature do
   end
 
   after do
-    clearAuth
+    clear_auth
   end
 
 end

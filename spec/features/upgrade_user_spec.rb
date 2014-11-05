@@ -2,10 +2,8 @@ require 'rails_helper'
 
 feature "User attempts to upgrade", js: true, :type => :feature  do
 
-  include Warden::Test::Helpers
-
   before do
-    setAuth
+    set_auth
     @user = create(:user)
     login_as(@user, :scope => :user)
   end
@@ -25,6 +23,6 @@ feature "User attempts to upgrade", js: true, :type => :feature  do
   end
 
   after do
-    clearAuth
+    clear_auth
   end
 end

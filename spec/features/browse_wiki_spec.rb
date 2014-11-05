@@ -2,10 +2,8 @@ require 'rails_helper'
 
 feature "User goes to wiki list", :type => :feature do
 
-  include Warden::Test::Helpers
-
   before do
-    setAuth
+    set_auth
     @user = create(:user)
     @collaborator = create(:user)
     @other = create(:user)
@@ -95,7 +93,7 @@ feature "User goes to wiki list", :type => :feature do
   end
 
   after do
-    clearAuth
+    clear_auth
   end
 
 end
