@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe 'charges/new.html.erb', :type => :view do
+describe 'charges/new', :type => :view do
 
   context 'current_user' do
     it 'can see upgrade button' do

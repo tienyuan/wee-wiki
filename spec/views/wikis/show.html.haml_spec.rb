@@ -16,10 +16,12 @@ describe 'wikis/show', :type => :view do
 
       expect(rendered).to have_content @wiki.title
       expect(rendered).to have_content @wiki.description
+      expect(rendered).not_to include 'glyphicon-lock'
       expect(rendered).to have_content 'Pages'
       expect(rendered).not_to have_content 'Edit Wiki'
       expect(rendered).not_to have_content 'Add Page'
       expect(rendered).not_to have_content 'Collaborators'
+      expect(rendered).not_to have_button 'Add User'
     end
 
     it 'with update? false and show? true' do
@@ -28,10 +30,12 @@ describe 'wikis/show', :type => :view do
 
       expect(rendered).to have_content @wiki.title
       expect(rendered).to have_content @wiki.description
+      expect(rendered).not_to include 'glyphicon-lock'
       expect(rendered).to have_content 'Pages'
       expect(rendered).not_to have_content 'Edit Wiki'
       expect(rendered).to have_content 'Add Page'
       expect(rendered).not_to have_content 'Collaborators'
+      expect(rendered).not_to have_button 'Add User'
     end
 
     it 'with update? true and show? false' do
@@ -40,22 +44,26 @@ describe 'wikis/show', :type => :view do
 
       expect(rendered).to have_content @wiki.title
       expect(rendered).to have_content @wiki.description
+      expect(rendered).not_to include 'glyphicon-lock'
       expect(rendered).to have_content 'Pages'
       expect(rendered).to have_content 'Edit Wiki'
       expect(rendered).not_to have_content 'Add Page'
       expect(rendered).not_to have_content 'Collaborators'
+      expect(rendered).not_to have_button 'Add User'
     end
 
     it 'with update? true and show? true' do
-      allow(view).to receive(:policy).with(@wiki).and_return(double(update?: true, show?: true))
+      allow(view).to receive(:policy).and_return(double(update?: true, show?: true))
       render
 
       expect(rendered).to have_content @wiki.title
       expect(rendered).to have_content @wiki.description
+      expect(rendered).not_to include 'glyphicon-lock'
       expect(rendered).to have_content 'Pages'
       expect(rendered).to have_content 'Edit Wiki'
       expect(rendered).to have_content 'Add Page'
       expect(rendered).not_to have_content 'Collaborators'
+      expect(rendered).not_to have_button 'Add User'
     end
   end
 
@@ -75,6 +83,7 @@ describe 'wikis/show', :type => :view do
 
       expect(rendered).to have_content @wiki.title
       expect(rendered).to have_content @wiki.description
+      expect(rendered).to include 'glyphicon-lock'
       expect(rendered).to have_content 'Pages'
       expect(rendered).not_to have_content 'Edit Wiki'
       expect(rendered).not_to have_content 'Add Page'
@@ -88,6 +97,7 @@ describe 'wikis/show', :type => :view do
 
       expect(rendered).to have_content @wiki.title
       expect(rendered).to have_content @wiki.description
+      expect(rendered).to include 'glyphicon-lock'
       expect(rendered).to have_content 'Pages'
       expect(rendered).not_to have_content 'Edit Wiki'
       expect(rendered).to have_content 'Add Page'
@@ -101,6 +111,7 @@ describe 'wikis/show', :type => :view do
 
       expect(rendered).to have_content @wiki.title
       expect(rendered).to have_content @wiki.description
+      expect(rendered).to include 'glyphicon-lock'
       expect(rendered).to have_content 'Pages'
       expect(rendered).to have_content 'Edit Wiki'
       expect(rendered).not_to have_content 'Add Page'
@@ -109,11 +120,12 @@ describe 'wikis/show', :type => :view do
     end
 
     it 'with update? true and show? true' do
-      allow(view).to receive(:policy).with(@wiki).and_return(double(update?: true, show?: true))
+      allow(view).to receive(:policy).and_return(double(update?: true, show?: true))
       render
 
       expect(rendered).to have_content @wiki.title
       expect(rendered).to have_content @wiki.description
+      expect(rendered).to include 'glyphicon-lock'
       expect(rendered).to have_content 'Pages'
       expect(rendered).to have_content 'Edit Wiki'
       expect(rendered).to have_content 'Add Page'
@@ -124,18 +136,20 @@ describe 'wikis/show', :type => :view do
 
   context 'visitor' do
     it "can see wiki and pages, but cannot manage wiki or pages" do
-      @wiki = assign(:wiki, build_stubbed(:wiki))
+      wiki = assign(:wiki, build_stubbed(:wiki))
       assign(:pages, {})
       allow(view).to receive_messages(current_user: nil)
       allow(view).to receive(:policy).and_return(double(update?: false, show?: false))
       render
 
-      expect(rendered).to have_content @wiki.title
-      expect(rendered).to have_content @wiki.description
+      expect(rendered).to have_content wiki.title
+      expect(rendered).to have_content wiki.description
+      expect(rendered).not_to include 'glyphicon-lock'
       expect(rendered).to have_content 'Pages'
       expect(rendered).not_to have_content 'Edit Wiki'
       expect(rendered).not_to have_content 'Add Page'
       expect(rendered).not_to have_content 'Collaborators'
+      expect(rendered).not_to have_button 'Add User'
     end
   end
 end

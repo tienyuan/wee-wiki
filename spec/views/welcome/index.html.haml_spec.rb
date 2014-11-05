@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe 'welcome/index.html.haml', :type => :view do
+describe 'welcome/index', :type => :view do
 
   context 'current_user' do
     it 'can see wiki link' do
