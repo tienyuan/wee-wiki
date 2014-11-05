@@ -1,39 +1,51 @@
 require 'rails_helper'
 
 feature "Visitor resets password" do
+
+  include EmailSpec::Helpers
+  include EmailSpec::Matchers
+
   before do
+    reset_mailer
     @user = create(:user)
   end
 
-  xscenario "with valid email" do
-    resets_password(@user.email)
-    signs_in_with(@user.email, @user.password)
+  scenario "with valid email" do
+    reset_password(@user.email)
+    expect(page).to have_content('You will receive an email with instructions on how to reset your password in a few minutes.')
 
+    click_forgot_password_link(@user.email, 'password')
     expect(current_path).to eq wikis_path 
     expect(page).to have_content('Browse Wikis')
+    expect(page).to have_content('Your password has been changed successfully. You are now signed in.')
   end
 
-  xscenario "with invalid email" do
-    signs_in_with("blah@blah.com", @user.password)
+  scenario "with invalid email" do
+    reset_password("blah@blah.com")
 
-    expect(current_path).to eq user_session_path
-    expect(page).to have_content('Invalid email address or password.')
+    expect(current_path).to eq user_password_path
+    expect(page).to have_content('Email not found')
   end
-
 
   private
 
-  def resets_password(email)
+  def reset_password(email)
+    visit root_path
+    click_link 'Sign In'
+    click_link 'Forgot your password?'
+    fill_in 'Email', with: email
+    within 'form' do
+      click_button 'Send me reset password instructions'
+    end 
   end
 
-  def signs_in_with(email, password)
-    visit root_path
-
-    click_link 'Sign In'
-    fill_in 'Email', with: email
-    fill_in 'Password', with: password
+  def click_forgot_password_link(email, password)
+    open_email(email, with_subject: "Reset password instructions")
+    visit_in_email("Change my password")
+    fill_in 'New password', with: password
+    fill_in 'Confirm new password', with: password
     within 'form' do
-      click_button 'Sign in'
-    end
+      click_button 'Change my password'
+    end    
   end
 end

@@ -5,7 +5,7 @@ feature "Visitor signs up" do
   include EmailSpec::Helpers
   include EmailSpec::Matchers
 
-  before(:each) do
+  before do
     reset_mailer
     set_auth
   end

@@ -37,7 +37,6 @@ feature "Visitor signs in" do
 
   def signs_in_with(email, password)
     visit root_path
-
     click_link 'Sign In'
     fill_in 'Email', with: email
     fill_in 'Password', with: password
