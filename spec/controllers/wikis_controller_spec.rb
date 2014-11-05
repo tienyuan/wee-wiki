@@ -91,15 +91,18 @@ describe WikisController, :type => :controller do
 
   describe '#update' do
     before do
-      @wiki = create(:wiki, owner: @user)
+      @wiki = create(:wiki, title: 'old title', owner: @user)
     end
 
     it "updates with valid info" do
+      expect(@wiki.title).to eq('old title')
+      expect(@wiki.slug).to eq('old-title')
       patch :update, id: @wiki.id, wiki:{title: 'new title'}
       @wiki.reload
 
       expect(response).to be_redirect
       expect(@wiki.title).to eq('new title')
+      expect(@wiki.slug).to eq('new-title')
     end
 
     it "fails without a title " do

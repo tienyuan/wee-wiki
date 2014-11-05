@@ -6,7 +6,7 @@ describe Wikis::PagesController, :type => :controller  do
 
   before do
     @wiki = create(:wiki)
-    @page = create(:page, wiki: @wiki)
+    @page = create(:page, title: 'old title', wiki: @wiki)
     @user = create(:user)
     sign_in @user
   end
@@ -71,10 +71,13 @@ describe Wikis::PagesController, :type => :controller  do
   describe '#update' do
     it "updates with valid info" do
       patch :update, wiki_id: @wiki.id, id: @page.id, page:{title: 'new title'}
+      expect(@page.title).to eq('old title')
+      expect(@page.slug).to eq('old-title')
       @page.reload
 
       expect(response).to be_redirect
       expect(@page.title).to eq('new title')
+      expect(@page.slug).to eq('new-title')
     end
 
     it "fails without a title" do
