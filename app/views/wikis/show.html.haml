@@ -5,12 +5,12 @@
       - if @wiki.private
         %small <span class="glyphicon glyphicon-lock"></span>
     %div 
-      = markdown @wiki.description
+      = show_markdown_html @wiki.description
       
       - if policy(@wiki).update?
         %div.pull-right
           = link_to "Edit Wiki", edit_wiki_path(@wiki), class: 'btn btn-default'
-      - if policy(@wiki).show?
+      - if current_user && policy(@wiki).show?
         = link_to "Add Page", new_wiki_page_path(@wiki), class: 'btn btn-primary'
     %hr
 %div.row

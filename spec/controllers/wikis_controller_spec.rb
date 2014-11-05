@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe WikisController, :type => :controller do
+describe WikisController, :type => :controller do
 
   include Devise::TestHelpers
 
@@ -34,13 +34,13 @@ RSpec.describe WikisController, :type => :controller do
     render_views
 
     it "shows with a valid wiki" do
-      @wiki = create(:wiki)
-      get :show, {id: @wiki.id}
+      wiki = create(:wiki)
+      get :show, {id: wiki.id}
 
       expect(response).to have_http_status(:success)
       expect(response).to render_template(:show)
-      expect(response.body).to include @wiki.title
-      expect(response.body).to include @wiki.description
+      expect(response.body).to include wiki.title
+      expect(response.body).to include wiki.description
     end
   end
 
@@ -79,7 +79,7 @@ RSpec.describe WikisController, :type => :controller do
     end
   end
 
-  describe "#edit", focus: true do
+  describe "#edit" do
     it "edits a page" do
       @wiki = create(:wiki, owner_id: @user.id)
       get :edit, {id: @wiki.id}
@@ -91,15 +91,18 @@ RSpec.describe WikisController, :type => :controller do
 
   describe '#update' do
     before do
-      @wiki = create(:wiki, owner: @user)
+      @wiki = create(:wiki, title: 'old title', owner: @user)
     end
 
     it "updates with valid info" do
+      expect(@wiki.title).to eq('old title')
+      expect(@wiki.slug).to eq('old-title')
       patch :update, id: @wiki.id, wiki:{title: 'new title'}
       @wiki.reload
 
       expect(response).to be_redirect
       expect(@wiki.title).to eq('new title')
+      expect(@wiki.slug).to eq('new-title')
     end
 
     it "fails without a title " do

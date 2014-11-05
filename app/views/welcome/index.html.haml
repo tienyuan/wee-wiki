@@ -7,7 +7,7 @@
       %h3 Ready to Start?
       - if current_user
         = link_to "Create a Wiki", new_wiki_path, class: 'btn btn-primary'
-        - if current_user.premium == false
+        - if !current_user.premium
           OR
           = link_to "Upgrade Your Account", new_charge_path, class: 'btn btn-primary'
       - else

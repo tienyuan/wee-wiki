@@ -1,18 +1,14 @@
 require 'rails_helper'
 
-feature "User attempts to upgrade", js: true do
-
-  include Warden::Test::Helpers
-  Warden.test_mode!
+feature "User attempts to upgrade", js: true, :type => :feature  do
 
   before do
+    set_auth
     @user = create(:user)
     login_as(@user, :scope => :user)
   end
 
-  # This test has been commented out to prevent accidental abuse during development.
-  # Uncomment the scenario when you wish to run the test against stripe's test server
-  xscenario "when signed in" do
+  scenario "when signed in", stripe_integration: true do
     visit new_charge_path
     click_button 'Pay with Card'
     sleep(8)
@@ -27,6 +23,6 @@ feature "User attempts to upgrade", js: true do
   end
 
   after do
-    Warden.test_reset!
+    clear_auth
   end
 end

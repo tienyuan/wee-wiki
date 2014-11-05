@@ -2,7 +2,7 @@ class WikisController < ApplicationController
   before_action :set_wiki, only: [:show, :edit, :update]
 
   def index
-    @wikis = Wiki.viewable_wikis(current_user)
+    @wikis = Wiki.viewable_wikis(current_user).sort_asc
   end
 
   def show
@@ -13,6 +13,7 @@ class WikisController < ApplicationController
   end
 
   def new
+    @subscription_price = Subscription.pretty_price
     @wiki = Wiki.new
     authorize @wiki
   end
@@ -34,7 +35,7 @@ class WikisController < ApplicationController
   end
 
   def update
-    @wiki.slug = nil
+    reset_wiki_slug
     authorize @wiki
     if @wiki.update_attributes(wiki_params) 
       redirect_to @wiki, notice: "Wiki edited!"
@@ -51,6 +52,10 @@ class WikisController < ApplicationController
   end
 
   def wiki_params
-    params.require(:wiki).permit(:title, :description, :private, :owner_id) 
+    params.require(:wiki).permit(:title, :description, :private)
+  end
+
+  def reset_wiki_slug
+    @wiki.slug = nil
   end
 end

@@ -1,11 +1,9 @@
 require 'rails_helper'
 
-feature "User goes to wiki list to" do
-
-  include Warden::Test::Helpers
-  Warden.test_mode!
+feature "User goes to wiki list to", :type => :feature do
 
   before do
+    set_auth
     @user = create(:user)
     @wiki = create(:wiki, title: 'Wiki title', description: 'Wiki description')
     login_as(@user, :scope => :user)
@@ -26,7 +24,6 @@ feature "User goes to wiki list to" do
   end
 
   after do
-    Warden.test_reset!
+    clear_auth
   end
-
 end

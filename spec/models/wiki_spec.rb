@@ -13,7 +13,7 @@ describe Wiki do
 
       expect(Wiki.count).to eq(4) 
       wiki_list = Wiki.viewable_wikis(user)
-      expect(wiki_list).to eq([public_wiki, owned_wiki, collaboration_wiki]) 
+      expect(wiki_list).to match_array([public_wiki, owned_wiki, collaboration_wiki]) 
     end
   end
 
@@ -28,7 +28,17 @@ describe Wiki do
 
       expect(Wiki.count).to eq(4) 
       wiki_list = Wiki.viewable_wikis(user)
-      expect(wiki_list).to eq([public_wiki]) 
+      expect(wiki_list).to match_array([public_wiki]) 
+    end
+  end
+
+  describe ".viewable_wikis(user) when user is nil" do
+    it "returns public wikis" do
+      a_wiki = create(:wiki, title: 'A wiki')
+      b_wiki = create(:wiki, title: 'B wiki')
+      c_wiki = create(:wiki, title: 'C wiki')
+
+      expect(Wiki.sort_asc).to eq([a_wiki, b_wiki, c_wiki])
     end
   end
 

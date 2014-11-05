@@ -1,16 +1,14 @@
 require 'rails_helper'
 
-feature "User adds collaborators" do
-
-  include Warden::Test::Helpers
-  Warden.test_mode!
+feature "User adds collaborators", :type => :feature do
 
   before do
+    set_auth
     @user = create(:user)
     @collaborator = create(:user)
-    login_as(@user, :scope => :user)
     @public_wiki = create(:wiki, title: 'public wiki title')
     @private_wiki = create(:wiki, title: 'private wiki title', description: 'wiki description', private: true, owner: @user)
+    login_as(@user, :scope => :user)
   end
 
   scenario "to private wiki using a valid user email and then removes it" do
@@ -59,7 +57,7 @@ feature "User adds collaborators" do
   end
 
   after do
-    Warden.test_reset!
+    clear_auth
   end
 
 end

@@ -1,11 +1,9 @@
 require 'rails_helper'
 
-feature "User creates a page" do
-
-  include Warden::Test::Helpers
-  Warden.test_mode!
+feature "User creates a page", :type => :feature do
 
   before do
+    set_auth
     @user = create(:user)
     login_as(@user, :scope => :user)
     wiki = create(:wiki, title: 'Wiki title', description: 'Wiki description')
@@ -56,7 +54,7 @@ feature "User creates a page" do
   end
 
   after do
-    Warden.test_reset!
+    clear_auth
   end
 
 end

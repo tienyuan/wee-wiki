@@ -5,7 +5,7 @@
       - if @wiki.private
         %small <span class="glyphicon glyphicon-lock"></span>
     %div 
-      = markdown @wiki.description
+      = show_markdown_html @wiki.description
       = link_to "Back to Index", @wiki, class: 'btn btn-primary'
     %hr
 %div.row
@@ -13,11 +13,11 @@
     %h2
       = @page.title
     %p 
-      = markdown @page.body
+      = show_markdown_html @page.body
   %div.col-md-4
     %div.pull-right
       %br 
-        - if policy(@wiki).show?
+        - if current_user && policy(@wiki).show?
           = link_to " Edit Page ", edit_wiki_page_path(@wiki, @page), class: 'btn btn-default'
           %br
           = link_to "Delete Page", [@wiki, @page], method: :delete, data: { confirm: 'Are you sure you want to delete this page?' }, class: 'btn btn-sm btn-link'

@@ -4,11 +4,10 @@ feature "Visitor signs up" do
 
   include EmailSpec::Helpers
   include EmailSpec::Matchers
-  include Warden::Test::Helpers
-  Warden.test_mode!
 
   before(:each) do
     reset_mailer
+    set_auth
   end
 
   scenario "with valid email and password" do
@@ -71,7 +70,7 @@ feature "Visitor signs up" do
   end
 
   after do
-    Warden.test_reset!
+    clear_auth
   end
 
   private

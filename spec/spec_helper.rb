@@ -35,8 +35,10 @@ RSpec.configure do |config|
     # Prevents you from mocking or stubbing a method that does not exist on
     # a real object. This is generally recommended, and will default to
     # `true` in RSpec 4.
-    mocks.verify_partial_doubles = true
+    mocks.verify_partial_doubles = false
   end
+
+  config.filter_run_excluding :stripe_integration => true
 
 # The settings below are suggested to provide a good initial experience
 # with RSpec, but feel free to customize to your heart's content.
@@ -47,6 +49,7 @@ RSpec.configure do |config|
   # get run.
   config.filter_run :focus
   config.run_all_when_everything_filtered = true
+
 
   # Limits the available syntax to the non-monkey patched syntax that is recommended.
   # For more details, see:
