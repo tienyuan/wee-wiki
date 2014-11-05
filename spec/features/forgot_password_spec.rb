@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature "Visitor resets password" do
+feature "User resets password" do
 
   include EmailSpec::Helpers
   include EmailSpec::Matchers
