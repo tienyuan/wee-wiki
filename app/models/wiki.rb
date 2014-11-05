@@ -12,13 +12,8 @@ class Wiki < ActiveRecord::Base
   friendly_id :title, use: :slugged
 
   def self.viewable_wikis(user)
-
     if user
-      # Wiki.includes(:collaborations).where("(private = ?) OR (owner_id = ?) OR (collaborations.user_id = ?)", false, user.id, user.id)
-      public_wikis = Wiki.where(private: false)
-      owned_wikis = Wiki.where("owner_id = ? AND private = ?", user.id, true)
-      collaborations_wikis = user.wikis
-      (public_wikis + owned_wikis + collaborations_wikis)
+      Wiki.includes(:collaborations).where("(private = ?) OR (owner_id = ?) OR (collaborations.user_id = ?)", false, user.id, user.id).references(:collaborations)
     else
       Wiki.where(private: false)
     end

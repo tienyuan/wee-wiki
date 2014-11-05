@@ -13,7 +13,7 @@ describe Wiki do
 
       expect(Wiki.count).to eq(4) 
       wiki_list = Wiki.viewable_wikis(user)
-      expect(wiki_list).to eq([public_wiki, owned_wiki, collaboration_wiki]) 
+      expect(wiki_list).to eq([collaboration_wiki, owned_wiki, public_wiki]) 
     end
   end
 
