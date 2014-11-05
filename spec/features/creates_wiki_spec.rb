@@ -1,12 +1,12 @@
 require 'rails_helper'
 
-feature "User goes to wiki list to" do
+feature "User goes to wiki list to", :type => :feature do
 
   include Warden::Test::Helpers
-  Warden.test_mode!
 
   feature "as a premium user" do
     before do
+      setAuth
       @user = create(:user, premium: true)
       login_as(@user, :scope => :user)
     end
@@ -66,12 +66,13 @@ feature "User goes to wiki list to" do
     end
 
     after do
-      Warden.test_reset!
+      clearAuth
     end
   end
 
   feature "as a normal user" do
     before do
+      setAuth
       @user = create(:user)
       login_as(@user, :scope => :user)
     end
@@ -124,7 +125,7 @@ feature "User goes to wiki list to" do
     end
 
     after do
-      Warden.test_reset!
+      clearAuth
     end
   end
 end

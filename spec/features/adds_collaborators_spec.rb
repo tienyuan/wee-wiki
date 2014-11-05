@@ -1,11 +1,11 @@
 require 'rails_helper'
 
-feature "User adds collaborators" do
+feature "User adds collaborators", :type => :feature do
 
   include Warden::Test::Helpers
-  Warden.test_mode!
 
   before do
+    setAuth
     @user = create(:user)
     @collaborator = create(:user)
     @public_wiki = create(:wiki, title: 'public wiki title')
@@ -59,7 +59,7 @@ feature "User adds collaborators" do
   end
 
   after do
-    Warden.test_reset!
+    clearAuth
   end
 
 end
