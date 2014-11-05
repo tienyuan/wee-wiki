@@ -3,9 +3,11 @@ require "rails_helper"
 describe 'charges/new.html.erb', :type => :view do
 
   context 'current_user' do
-    xit 'can see upgrade button' do
+    it 'can see upgrade button' do
       user = assign(:user, build_stubbed(:user, premium: false))
+      assign(:stripe_btn_data, {})
       allow(view).to receive_messages(current_user: user)
+
       render
 
       expect(rendered).to have_content 'We accept all major credit cards.'
