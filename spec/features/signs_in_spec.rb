@@ -16,12 +16,14 @@ feature "Visitor signs in" do
     signs_in_with("blah@blah.com", @user.password)
 
     expect(current_path).to eq user_session_path
+    expect(page).to have_content('Invalid email address or password.')
   end
 
   scenario "with blank password" do
     signs_in_with(@user.email, "")
 
     expect(current_path).to eq user_session_path
+    expect(page).to have_content('Invalid email address or password.')
   end
   
   scenario "doesn't sign in" do
