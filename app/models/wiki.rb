@@ -11,6 +11,8 @@ class Wiki < ActiveRecord::Base
 
   friendly_id :title, use: :slugged
 
+  scope :sort_asc, -> { order('title ASC') }
+
   def self.viewable_wikis(user)
     if user
       Wiki.includes(:collaborations).where("(private = ?) OR (owner_id = ?) OR (collaborations.user_id = ?)", false, user.id, user.id).references(:collaborations)

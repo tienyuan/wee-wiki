@@ -2,7 +2,7 @@ class WikisController < ApplicationController
   before_action :set_wiki, only: [:show, :edit, :update]
 
   def index
-    @wikis = Wiki.viewable_wikis(current_user)
+    @wikis = Wiki.viewable_wikis(current_user).sort_asc
   end
 
   def show
