@@ -4,7 +4,7 @@ Description
 ----------------------
 This is an SaaS app that incorporates Stripe and allows you to collaborate with others to create markdown-powered wikis.
 
-Made with my mentor at Bloc.
+Made with my mentor, [Eliot Sykes](https://www.bloc.io/mentors/eliot-sykes) at Bloc.
 
 Visit a working copy at [tienyuan-weewiki](http://tienyuan-weewiki.herokuapp.com/)
 
