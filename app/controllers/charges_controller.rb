@@ -28,8 +28,8 @@ class ChargesController < ApplicationController
     enable_premium
     redirect_to wikis_path 
    
-  rescue Stripe::CardError => e
-    flash[:error] = e.message
+  rescue Stripe::CardError => error
+    flash[:error] = error.message
     redirect_to new_charge_path
   end
 

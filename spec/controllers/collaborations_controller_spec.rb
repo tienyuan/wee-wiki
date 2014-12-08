@@ -11,6 +11,8 @@ describe Wikis::CollaborationsController do
   end
 
   describe "#create" do
+    render_views
+
     it "creates with valid title and description" do
       params = {wiki_id: @wiki, user: {email: @user.email}}
       post :create, params

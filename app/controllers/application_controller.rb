@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :configure_permitted_parameters, if: :devise_controller?
 
-  def after_sign_in_path_for(resource)
+  def after_sign_in_path_for(_resource)
     wikis_path
   end
 
@@ -12,8 +12,8 @@ class ApplicationController < ActionController::Base
   protected
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:username, :name, :email, :password) }
-    devise_parameter_sanitizer.for(:account_update) { |u| u.permit(:username, :name, :email, :password, :current_password) }
+    devise_parameter_sanitizer.for(:sign_up) { |user| user.permit(:username, :name, :email, :password) }
+    devise_parameter_sanitizer.for(:account_update) { |user| user.permit(:username, :name, :email, :password, :current_password) }
   end
 
   private
