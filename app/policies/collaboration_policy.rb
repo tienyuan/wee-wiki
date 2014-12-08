@@ -4,6 +4,6 @@ class CollaborationPolicy < ApplicationPolicy
   end
 
   def create?
-      user.present? && (user == record.wiki.owner)
+    user.present? && (user == record.wiki.owner)
   end
 end

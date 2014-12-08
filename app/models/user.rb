@@ -1,9 +1,9 @@
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable, 
+  devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
-         
+
   validates :name, presence: true
   validates :username, presence: true, uniqueness: true
 
@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
   has_many :collaborations
   has_many :wikis, through: :collaborations
 
-  def self.allowed_users(wiki) 
+  def self.allowed_users(wiki)
     results = User.where(id: wiki.owner_id)
     results + wiki.users
   end

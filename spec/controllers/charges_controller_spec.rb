@@ -10,10 +10,10 @@ describe ChargesController, :type => :controller do
     sign_in @user
   end
 
-  describe "#new" do
+  describe '#new' do
     render_views
 
-    it "shows a new charge form" do
+    it 'shows a new charge form' do
       get :new
 
       expect(response).to have_http_status(:success)

@@ -13,37 +13,37 @@ describe WikiPolicy do
   end
 
   permissions :show? do
-    it "denies access if wiki is private" do
+    it 'denies access if wiki is private' do
       expect(subject).not_to permit(@user, @private_wiki)
     end
 
-    it "grants access if wiki is private and user is collaborator" do
+    it 'grants access if wiki is private and user is collaborator' do
       expect(subject).to permit(@collaborator, @private_wiki)
     end
 
-    it "grants access if wiki is private and owned by user" do
+    it 'grants access if wiki is private and owned by user' do
       expect(subject).to permit(@owner, @private_wiki)
     end
 
-    it "grants access if wiki is public" do
+    it 'grants access if wiki is public' do
       expect(subject).to permit(@user, @public_wiki)
     end
   end
 
   permissions :update? do
-    it "denies access if wiki is private" do
+    it 'denies access if wiki is private' do
       expect(subject).not_to permit(@user, @private_wiki)
     end
 
-    it "denies access if wiki is private and user is collaborator" do
+    it 'denies access if wiki is private and user is collaborator' do
       expect(subject).not_to permit(@collaborator, @private_wiki)
     end
 
-    it "grants access if wiki is private and owned by user" do
+    it 'grants access if wiki is private and owned by user' do
       expect(subject).to permit(@owner, @private_wiki)
     end
 
-    it "grants access if wiki is public" do
+    it 'grants access if wiki is public' do
       expect(subject).to permit(@user, @public_wiki)
     end
   end

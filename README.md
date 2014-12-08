@@ -26,6 +26,7 @@ Gems include:
 * friendly_id
 * redcarpet
 
+
 Setup
 ----------------------
 
@@ -57,3 +58,10 @@ Run `rspec/spec` to test the application.
 FYI, a JS dependent feature (spec/features/upgrade_user_spec.rb) is tested using [poltergeist](http://phantomjs.org/) and [phantomjs](http://phantomjs.org/). Running this test will require additional setup. 
 
 Run `rspec -t stripe_integration` to test stripe integration which is excluded by default.
+
+
+Screenshots
+----------------------
+![Wiki List](http://tienyuan.github.io/wee-wiki/img/wikilist.png)
+![Public Wiki](http://tienyuan.github.io/wee-wiki/img/publicwiki.png)
+![Private Wiki](http://tienyuan.github.io/wee-wiki/img/privatewiki.png)

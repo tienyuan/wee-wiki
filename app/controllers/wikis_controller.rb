@@ -23,9 +23,9 @@ class WikisController < ApplicationController
     @wiki.owner = current_user
     authorize @wiki
     if @wiki.save
-      redirect_to @wiki, notice: "Wiki created!"
+      redirect_to @wiki, notice: 'Wiki created!'
     else
-      flash[:error] = "Wiki failed. Please try again."
+      flash[:error] = 'Wiki failed. Please try again.'
       render :new
     end
   end
@@ -37,10 +37,10 @@ class WikisController < ApplicationController
   def update
     reset_wiki_slug
     authorize @wiki
-    if @wiki.update_attributes(wiki_params) 
-      redirect_to @wiki, notice: "Wiki edited!"
+    if @wiki.update_attributes(wiki_params)
+      redirect_to @wiki, notice: 'Wiki edited!'
     else
-      flash[:error] = "Wiki edit failed. Please try again."
+      flash[:error] = 'Wiki edit failed. Please try again.'
       render :edit
     end
   end

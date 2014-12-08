@@ -15,9 +15,9 @@ class Wikis::PagesController < ApplicationController
     @page = @wiki.pages.new(page_params)
     authorize @page
     if @page.save
-      redirect_to [@wiki, @page], notice: "Page added!"
+      redirect_to [@wiki, @page], notice: 'Page added!'
     else
-      flash[:error] = "Page failed. Please try again."
+      flash[:error] = 'Page failed. Please try again.'
       render :new
     end
   end
@@ -30,9 +30,9 @@ class Wikis::PagesController < ApplicationController
     reset_page_slug
     authorize @page
     if @page.update_attributes(page_params)
-      redirect_to [@wiki, @page], notice: "Page edited!"
+      redirect_to [@wiki, @page], notice: 'Page edited!'
     else
-      flash[:error] = "Page edit failed. Please try again."
+      flash[:error] = 'Page edit failed. Please try again.'
       render :edit
     end
   end
@@ -41,9 +41,9 @@ class Wikis::PagesController < ApplicationController
     authorize @page
 
     if @page.destroy
-      redirect_to @wiki, notice: "Page deleted!"
+      redirect_to @wiki, notice: 'Page deleted!'
     else
-      flash[:error] = "Page delete failed. Please try again."
+      flash[:error] = 'Page delete failed. Please try again.'
       redirect_to [@wiki, @page]
     end
   end
@@ -51,7 +51,7 @@ class Wikis::PagesController < ApplicationController
   private
 
   def page_params
-    params.require(:page).permit(:title, :body) 
+    params.require(:page).permit(:title, :body)
   end
 
   def set_wiki

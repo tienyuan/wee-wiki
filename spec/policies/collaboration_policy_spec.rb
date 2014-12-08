@@ -13,17 +13,16 @@ describe CollaborationPolicy do
 
   permissions :create? do
 
-    it "denies access if wiki is private" do
+    it 'denies access if wiki is private' do
       expect(subject).not_to permit(@user, @collaboration)
     end
 
-    it "denies access if wiki is private and user is collaborator" do
+    it 'denies access if wiki is private and user is collaborator' do
       expect(subject).not_to permit(@collaborator, @collaboration)
     end
 
-    it "grants access if wiki is private and owned by user" do
+    it 'grants access if wiki is private and owned by user' do
       expect(subject).to permit(@owner, @collaboration)
     end
-
   end
 end

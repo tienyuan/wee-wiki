@@ -1,7 +1,7 @@
 class Wiki < ActiveRecord::Base
   extend FriendlyId
 
-  belongs_to :owner, class_name: "User"
+  belongs_to :owner, class_name: 'User'
   has_many :pages, dependent: :destroy
   has_many :collaborations
   has_many :users, through: :collaborations
@@ -15,7 +15,7 @@ class Wiki < ActiveRecord::Base
 
   def self.viewable_wikis(user)
     if user
-      Wiki.includes(:collaborations).where("(private = ?) OR (owner_id = ?) OR (collaborations.user_id = ?)", false, user.id, user.id).references(:collaborations)
+      Wiki.includes(:collaborations).where('(private = ?) OR (owner_id = ?) OR (collaborations.user_id = ?)', false, user.id, user.id).references(:collaborations)
     else
       Wiki.where(private: false)
     end

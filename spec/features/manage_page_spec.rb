@@ -37,5 +37,4 @@ feature "User goes to wiki list to", :type => :feature do
   after do
     clear_auth
   end
-
 end

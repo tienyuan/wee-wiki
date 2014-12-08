@@ -1,8 +1,8 @@
 class Subscription
-  PRICE_CENTS = 1000.freeze
+  PRICE_CENTS = 1_000.freeze
 
   def self.price_usd
-    PRICE_CENTS/100
+    PRICE_CENTS / 100
   end
 
   def self.price_cents

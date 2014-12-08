@@ -1,6 +1,6 @@
-require "rails_helper"
+require 'rails_helper'
 
-describe 'wikis/pages/show', :type => :view do
+describe 'wikis/pages/show', type: :view do
 
   context 'user sees a page from a public wiki' do
     before do
@@ -73,7 +73,7 @@ describe 'wikis/pages/show', :type => :view do
   end
 
   context 'visitor' do
-    it "can see wiki and pages, but cannot manage wiki or pages", focus: true do
+    it 'can see wiki and pages, but cannot manage wiki or pages', focus: true do
       wiki = assign(:wiki, build_stubbed(:wiki))
       page = assign(:page, build_stubbed(:page))
       allow(view).to receive_messages(current_user: nil)

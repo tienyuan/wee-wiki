@@ -1,6 +1,6 @@
-require "rails_helper"
+require 'rails_helper'
 
-describe 'welcome/index', :type => :view do
+describe 'welcome/index', type: :view do
 
   context 'current_user' do
     it 'can see wiki link' do
@@ -13,7 +13,7 @@ describe 'welcome/index', :type => :view do
   end
 
   context 'visitor' do
-    it "can see sign up link" do
+    it 'can see sign up link' do
       allow(view).to receive_messages(current_user: nil)
       render
 

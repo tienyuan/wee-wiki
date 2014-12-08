@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature "User adds collaborators", :type => :feature do
+feature 'User adds collaborators', :type => :feature do
 
   before do
     set_auth
@@ -11,9 +11,9 @@ feature "User adds collaborators", :type => :feature do
     login_as(@user, :scope => :user)
   end
 
-  scenario "to private wiki using a valid user email and then removes it" do
+  scenario 'to private wiki using a valid user email and then removes it' do
     visit wikis_path
-    click_link "private wiki title"
+    click_link 'private wiki title'
     fill_in 'user-email', with: @collaborator.email
     within 'form' do
       click_button 'Add'
@@ -22,14 +22,14 @@ feature "User adds collaborators", :type => :feature do
     expect(page).to have_content('Collaborator added!')
     expect(page).to have_content(@collaborator.username)
 
-    click_link "Remove"
+    click_link 'Remove'
     expect(page).to have_content('Collaborator removed.')
     expect(page).not_to have_content(@collaborator.username)
   end
 
-  scenario "fails with an invalid user email" do
+  scenario 'fails with an invalid user email' do
     visit wikis_path
-    click_link "private wiki title"
+    click_link 'private wiki title'
     fill_in 'user-email', with: 'invalid@email.com'
     within 'form' do
       click_button 'Add'
@@ -38,9 +38,9 @@ feature "User adds collaborators", :type => :feature do
     expect(page).to have_content('Collaborator failed.')
   end
 
-  scenario "fails with a blank email" do
+  scenario 'fails with a blank email' do
     visit wikis_path
-    click_link "private wiki title"
+    click_link 'private wiki title'
     fill_in 'user-email', with: ''
     within 'form' do
       click_button 'Add'
@@ -49,9 +49,9 @@ feature "User adds collaborators", :type => :feature do
     expect(page).to have_content('Collaborator failed.')
   end
 
-  scenario "fails with a public wiki" do
+  scenario 'fails with a public wiki' do
     visit wikis_path
-    click_link "public wiki title"
+    click_link 'public wiki title'
 
     expect(page).not_to have_content('user-email')
   end
@@ -59,5 +59,4 @@ feature "User adds collaborators", :type => :feature do
   after do
     clear_auth
   end
-
 end

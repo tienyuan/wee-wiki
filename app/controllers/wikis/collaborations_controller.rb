@@ -5,17 +5,13 @@ class Wikis::CollaborationsController < ApplicationController
     @email = params[:user][:email]
     @user = User.where(email: @email).first if @email
 
-    if @user && new_collaboration?(@wiki, @user) 
-      @collaboration = Collaboration.new(wiki: @wiki, user: @user)
-    end
-
-    authorize @collaboration if @collaboration
+    authorize @collaboration if set_collaboration
 
     if @collaboration
       @collaboration.save
-      redirect_to @wiki, notice: "Collaborator added!"
+      redirect_to @wiki, notice: 'Collaborator added!'
     else
-      flash[:error] = "Collaborator failed. Please try again."
+      flash[:error] = 'Collaborator failed. Please try again.'
       redirect_to @wiki
     end
   end
@@ -26,21 +22,22 @@ class Wikis::CollaborationsController < ApplicationController
 
     authorize @collaboration
     if @collaboration.destroy
-      flash[:notice] = "Collaborator removed."
-      redirect_to @wiki
+      redirect_to @wiki, notice: 'Collaborator removed.'
     else
-      flash[:error] = "Removal failed. Please try again."
+      flash[:error] = 'Removal failed. Please try again.'
       redirect_to @wiki
     end
   end
 
-  private 
+  private
 
   def set_wiki
     @wiki = Wiki.friendly.find(params[:wiki_id])
   end
 
-  def new_collaboration?(wiki, user)
-    !Collaboration.exists?(wiki: wiki, user: user)
+  def set_collaboration
+    if @user && !Collaboration.exists?(wiki: @wiki, user: @user)
+      @collaboration = Collaboration.new(wiki: @wiki, user: @user)
+    end
   end
 end

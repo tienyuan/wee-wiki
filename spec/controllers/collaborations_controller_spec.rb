@@ -18,7 +18,6 @@ describe Wikis::CollaborationsController do
       post :create, params
 
       expect(response).to be_redirect
-      expect(flash[:notice]).to eq "Collaborator added!"
       expect(User.last.username).to eq(@user.username)
     end
 

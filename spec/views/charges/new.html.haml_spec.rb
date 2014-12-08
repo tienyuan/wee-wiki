@@ -1,6 +1,6 @@
-require "rails_helper"
+require 'rails_helper'
 
-describe 'charges/new', :type => :view do
+describe 'charges/new', type: :view do
 
   context 'current_user' do
     it 'can see upgrade button' do
@@ -20,12 +20,12 @@ describe 'charges/new', :type => :view do
       allow(view).to receive_messages(current_user: user)
       render
 
-      expect(rendered).to have_content "Thanks! You're upgraded."
+      expect(rendered).to have_content 'Thanks! You\'re upgraded.'
     end
   end
 
   context 'visitor' do
-    it "can see sign up message" do
+    it 'can see sign up message' do
       allow(view).to receive_messages(current_user: nil)
       render
 
