@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe ChargesController, :type => :controller do
+describe ChargesController, type: :controller do
 
   include Devise::TestHelpers
 

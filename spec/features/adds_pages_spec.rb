@@ -5,8 +5,8 @@ feature 'User creates a page', type: :feature do
   before do
     set_auth
     @user = create(:user)
-    login_as(@user, :scope => :user)
-    wiki = create(:wiki, title: 'Wiki title', description: 'Wiki description')
+    login_as(@user, scope: :user)
+    create(:wiki, title: 'Wiki title', description: 'Wiki description')
   end
 
   scenario 'with valid title and body' do
@@ -19,7 +19,7 @@ feature 'User creates a page', type: :feature do
     within 'form' do
       click_button 'Submit'
     end
-      
+
     expect(page).to have_content('Page added!')
     expect(page).to have_content('Page title')
     expect(page).to have_content('Page body')
@@ -35,7 +35,7 @@ feature 'User creates a page', type: :feature do
     within 'form' do
       click_button 'Submit'
     end
-      
+
     expect(page).to have_content('Page failed.')
   end
 
@@ -49,7 +49,7 @@ feature 'User creates a page', type: :feature do
     within 'form' do
       click_button 'Submit'
     end
-      
+
     expect(page).to have_content('Page failed.')
   end
 

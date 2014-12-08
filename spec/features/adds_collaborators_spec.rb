@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature 'User adds collaborators', :type => :feature do
+feature 'User adds collaborators', type: :feature do
 
   before do
     set_auth
@@ -8,7 +8,7 @@ feature 'User adds collaborators', :type => :feature do
     @collaborator = create(:user)
     @public_wiki = create(:wiki, title: 'public wiki title')
     @private_wiki = create(:wiki, title: 'private wiki title', description: 'wiki description', private: true, owner: @user)
-    login_as(@user, :scope => :user)
+    login_as(@user, scope: :user)
   end
 
   scenario 'to private wiki using a valid user email and then removes it' do

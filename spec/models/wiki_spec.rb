@@ -56,7 +56,7 @@ describe Wiki do
     before do
       @wiki = create(:wiki)
     end
-    
+
     it { expect(@wiki).to belong_to(:owner) }
     it { expect(@wiki).to have_many(:pages) }
     it { expect(@wiki).to have_many(:users) }

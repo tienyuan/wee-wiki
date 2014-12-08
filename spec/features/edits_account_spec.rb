@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature "User edits account" do
+feature 'User edits account' do
 
   include EmailSpec::Helpers
   include EmailSpec::Matchers
@@ -12,10 +12,10 @@ feature "User edits account" do
     click_link @user.username
   end
 
-  scenario "with a new email, password, name, new username and valid current password" do
-    expect(current_path).to eq edit_user_registration_path 
+  scenario 'with a new email, password, name, new username and valid current password' do
+    expect(current_path).to eq edit_user_registration_path
     expect(page).to have_content('Edit User')
-    
+
     fill_in 'Email', with: 'lex@luthorcorp.com'
     fill_in 'Password', with: 'password'
     fill_in 'Password confirmation', with: 'password'
@@ -33,10 +33,10 @@ feature "User edits account" do
     expect(User.last.username).to eq('lex')
   end
 
-  scenario "with a new password, name, new username and invalid current password" do
-    expect(current_path).to eq edit_user_registration_path 
+  scenario 'with a new password, name, new username and invalid current password' do
+    expect(current_path).to eq edit_user_registration_path
     expect(page).to have_content('Edit User')
-    
+
     fill_in 'Email', with: 'lex@luthorcorp.com'
     fill_in 'Password', with: 'password'
     fill_in 'Password confirmation', with: 'password'
@@ -48,8 +48,8 @@ feature "User edits account" do
     expect(page).to have_content('Current password is invalid')
   end
 
-  scenario "and cancels account" do
-    expect(current_path).to eq edit_user_registration_path 
+  scenario 'and cancels account' do
+    expect(current_path).to eq edit_user_registration_path
     expect(page).to have_content('Edit User')
     click_button 'Cancel account'
 
@@ -60,8 +60,8 @@ feature "User edits account" do
   private
 
   def click_email_confirmation_link(email)
-    open_email(email, with_subject: "Confirmation instructions")
-    visit_in_email("Confirm my account")
+    open_email(email, with_subject: 'Confirmation instructions')
+    visit_in_email('Confirm my account')
   end
 
   def signs_in_with(email, password)

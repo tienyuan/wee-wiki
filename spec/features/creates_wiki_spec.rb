@@ -17,7 +17,7 @@ feature 'User goes to wiki list to', type: :feature do
       within 'form' do
         click_button 'Submit'
       end
-        
+
       expect(page).to have_content('Wiki created!')
       expect(page).to have_content('Wiki title')
       expect(page).to have_content('Wiki description')
@@ -32,7 +32,7 @@ feature 'User goes to wiki list to', type: :feature do
       within 'form' do
         click_button 'Submit'
       end
-        
+
       expect(page).to have_content('Wiki created!')
       expect(page).to have_content('Private wiki title')
       expect(page).to have_content('Private wiki description')
@@ -47,7 +47,7 @@ feature 'User goes to wiki list to', type: :feature do
       within 'form' do
         click_button 'Submit'
       end
-        
+
       expect(page).to have_content('Wiki failed.')
     end
 
@@ -59,7 +59,7 @@ feature 'User goes to wiki list to', type: :feature do
       within 'form' do
         click_button 'Submit'
       end
-        
+
       expect(page).to have_content('Wiki failed.')
     end
 
@@ -83,7 +83,7 @@ feature 'User goes to wiki list to', type: :feature do
       within 'form' do
         click_button 'Submit'
       end
-        
+
       expect(page).to have_content('Wiki created!')
       expect(page).to have_content('Wiki title')
       expect(page).to have_content('Wiki description')
@@ -94,7 +94,7 @@ feature 'User goes to wiki list to', type: :feature do
       click_link 'Create Wiki'
       fill_in 'wiki-title', with: 'Private wiki title'
       fill_in 'wiki-description', with: 'Private wiki description'
-      
+
       expect(page).not_to have_content('Private wiki')
     end
 
@@ -106,7 +106,7 @@ feature 'User goes to wiki list to', type: :feature do
       within 'form' do
         click_button 'Submit'
       end
-        
+
       expect(page).to have_content('Wiki failed.')
     end
 
@@ -118,7 +118,7 @@ feature 'User goes to wiki list to', type: :feature do
       within 'form' do
         click_button 'Submit'
       end
-        
+
       expect(page).to have_content('Wiki failed.')
     end
 

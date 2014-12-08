@@ -8,10 +8,10 @@ feature 'User goes to wiki list', type: :feature do
     @collaborator = create(:user)
     @other = create(:user)
     public_wiki = create(:wiki, title: 'public wiki title', description: 'public wiki description')
-    owned_wiki = create(:wiki, title: 'owned wiki title', owner: @user, private: true)
+    create(:wiki, title: 'owned wiki title', owner: @user, private: true)
     private_wiki = create(:wiki, title: 'private wiki title', private: true)
-    collaboration = create(:collaboration, wiki_id: private_wiki.id, user_id: @collaborator.id)
-    page = create(:page, title: 'page title', body: 'page body', wiki: public_wiki)
+    create(:collaboration, wiki_id: private_wiki.id, user_id: @collaborator.id)
+    create(:page, title: 'page title', body: 'page body', wiki: public_wiki)
   end
 
   scenario 'as an owner, sees public and owned wikis' do
@@ -33,7 +33,7 @@ feature 'User goes to wiki list', type: :feature do
 
   scenario 'as a collaborator, sees public and collaboration wikis' do
     login_as(@collaborator, scope: :user)
-    
+
     visit root_path
     click_link 'Browse Wikis'
 
@@ -50,7 +50,7 @@ feature 'User goes to wiki list', type: :feature do
 
   scenario 'as a user, sees public wikis' do
     login_as(@other, scope: :user)
-    
+
     visit root_path
     click_link 'Browse Wikis'
 
@@ -72,7 +72,7 @@ feature 'User goes to wiki list', type: :feature do
   end
 
   scenario 'as a visitor, sees public wikis' do
-    
+
     visit root_path
     click_link 'Browse Wikis'
 
